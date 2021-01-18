@@ -1,15 +1,11 @@
 import {combineReducers, createStore, applyMiddleware,compose} from "redux";
 import thunkMiddleware from 'redux-thunk'
+import GlobalSettingsReduser from "./global-settings-reduser";
 //import {reducer as formReducer} from 'redux-form' 
 
 
 let redusers = combineReducers({
-    UserPage: UserPageReduser,
-    MesegesPage: MesegesPageReduser,
-    FrendsPage: FrendsPageReduser,
-    AuthData: AuthPageReduser,
-    form: formReducer,
-    app: AppReduser,
+    GlobalSettings: GlobalSettingsReduser,
 })
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(redusers, /* preloadedState, */ composeEnhancers(

@@ -1,6 +1,22 @@
-import react from 'react'
+import React from 'react'
+import { compose } from 'redux';
+import h from './h.module.scss'
+import classNames from 'classnames/bind';
+import { connect } from 'react-redux';
+import {chaingeDarckModeAC} from '../Redux/global-settings-reduser'
 
 const Header = (props) => {
+
+    let cx = classNames.bind(h);
+    const className =cx({
+        chainge_mode_white: true,
+        chainge_mode_darck: props.darckMode
+    })
+
+    const ChaingeMode = () =>{
+        props.chaingeDarckModeAC()
+    }
+
     return(
         <>
         <div>
@@ -10,9 +26,19 @@ const Header = (props) => {
             <p>Today date</p>
         </div>
         <div>
-            <p>Chainge darck mode button heare</p>
+            <span>Light</span>
+            <div className ={className} onClick = {ChaingeMode}></div>
+            <span>Dark</span>
         </div>
         </>
     )
 }
-export default Header
+
+let mapStateToProps = (state) =>{
+    return{
+        darckMode: state.GlobalSettings.darkMode,
+    }
+}
+export default compose(
+    connect(mapStateToProps,{chaingeDarckModeAC})
+) (Header)

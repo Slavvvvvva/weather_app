@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="3350.041" height="2991.041" viewBox="0 0 3350.041 2991.041">
+  <defs>
+    <linearGradient id="linear-gradient" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#9cff95"/>
+      <stop offset="1" stop-color="#00b3ff"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#c8ffc4"/>
+      <stop offset="1" stop-color="#0fd"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#9cff95"/>
+      <stop offset="1" stop-color="#0fd"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-5" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#8383ff"/>
+      <stop offset="0.735" stop-color="#ffd9ff"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+  </defs>
+  <g id="Сгруппировать_31" data-name="Сгруппировать 31" transform="translate(729.021 963.021)">
+    <g id="Сгруппировать_46" data-name="Сгруппировать 46">
+      <circle id="Эллипс_28" data-name="Эллипс 28" cx="705" cy="705" r="705" transform="translate(268 1115.021) rotate(-135)" fill="url(#linear-gradient)"/>
+      <circle id="Эллипс_31" data-name="Эллипс 31" cx="705" cy="705" r="705" transform="translate(-315.048 1204.048) rotate(-60)" fill="url(#linear-gradient-2)"/>
+      <circle id="Эллипс_32" data-name="Эллипс 32" cx="705" cy="705" r="705" transform="translate(1599 1031.021) rotate(-135)" fill="url(#linear-gradient-3)"/>
+      <circle id="Эллипс_29" data-name="Эллипс 29" cx="705" cy="705" r="705" transform="translate(1624 2028.021) rotate(-135)" fill="url(#linear-gradient)"/>
+    </g>
+    <path id="Прямоугольник_59" data-name="Прямоугольник 59" d="M20,0H1198a20,20,0,0,1,20,20V406a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V20A20,20,0,0,1,20,0Z" transform="translate(322 163)" opacity="0.6" fill="url(#linear-gradient-5)"/>
+  </g>
+</svg>
