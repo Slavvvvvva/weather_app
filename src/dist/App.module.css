@@ -4,6 +4,8 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  font-family: sans-serif;
+  text-transform: uppercase;
 }
 .body .head {
   height: 92px;
@@ -16,10 +18,16 @@
 }
 .body .content {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: calc(100vh - 92px);
   background-image: url("./components/IMG/background/Сгруппировать 46.svg");
   background-position: center center;
 }
 .body .content_black {
   background-image: url("./components/IMG/background/Сгруппировать 49.svg");
+}
+
+.body_black {
+  color: white;
 }

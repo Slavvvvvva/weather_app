@@ -5,23 +5,28 @@ import { connect } from 'react-redux'
 import { compose } from 'redux';
 import classNames from 'classnames/bind'
 import Header from './components/Header/header';
+import YourPlace from './components/YourPlace/your-place';
 
 
 const App = (props) => {
 
   let cx = classNames.bind(s);
-    const classNameH =cx({
+  const classNameH =cx({
         head: true,
         head_black: props.darckMode
     })
-    const classNameC =cx({
+  const classNameC =cx({
       content: true,
       content_black: props.darckMode
   })
+  const classNameB =cx({
+    body: true,
+    body_black: props.darckMode
+})
 
   return (
     <BrowserRouter>
-      <div className={s.body}>
+      <div className={classNameB}>
         <div className={classNameH}>
           <Header/>
         </div>
@@ -29,9 +34,9 @@ const App = (props) => {
           <Switch>
             {/* {<Route path='/myprofile/:userId?' render={() => <UserContainer />} />
             <Route path='/meseges' render={() => <ChatContainer />} />
-            <Route path='/login' render={() => <Login />} />
-            <Route exact path='/' render={() => <Redirect to={'/login'} />} />}
-            <Route path='/*' render={() => <h1> 404 page not found </h1>} /> */}
+            <Route path='/login' render={() => <Login />} /> */}
+            <Route exact path='/' render={() => <YourPlace/>}/>
+            <Route path='/*' render={() => <h1> 404 page not found </h1>} />
           </Switch>
         </div>
       </div>
