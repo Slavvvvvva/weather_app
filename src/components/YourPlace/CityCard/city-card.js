@@ -1,10 +1,15 @@
-import React from 'react'
-import { compose } from 'redux';
+import React, {useEffect} from 'react'
+import { compose } from 'redux'
 import c from './c.module.scss'
-import classNames from 'classnames/bind';
-import { connect } from 'react-redux';
+import classNames from 'classnames/bind'
+import { connect } from 'react-redux'
+import {getCurrentWeatherTC} from '../../Redux/weather-reduser'
 
 const CityCard =(props) => {
+
+    useEffect ( () => {
+        props.getCurrentWeatherTC()
+    },[])
 
     let cx = classNames.bind(c);
     const className =cx({
@@ -14,8 +19,8 @@ const CityCard =(props) => {
 
     return(
             <div className ={className}>
-                <p>Add city</p>
-                <button></button>
+                <p></p>
+                
             </div>     
     )
 }
@@ -23,8 +28,9 @@ const CityCard =(props) => {
 let mapStateToProps = (state) =>{
     return{
         darckMode: state.GlobalSettings.darkMode,
+        CurrentWeather:state.Weather.CurrentWeather
     }
 }
 export default compose(
-    connect(mapStateToProps,{})
+    connect(mapStateToProps,{getCurrentWeatherTC})
 ) (CityCard)

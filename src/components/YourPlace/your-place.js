@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { compose } from 'redux';
 import y from './y.module.scss'
 import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
 import CityCard from './CityCard/city-card';
+
 
 const YourPlace =(props) => {
 
