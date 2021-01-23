@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import y from './y.module.scss'
 import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
+import {getCurrentWeatherTC} from '../Redux/weather-reduser'
 import CityCard from './CityCard/city-card';
 
 
@@ -14,11 +15,24 @@ const YourPlace =(props) => {
         add_card_dark: props.darckMode
     })
 
+    let cityName = React.createRef();
+
+    const AddNevSity = () =>{
+        props.getCurrentWeatherTC(cityName.current.value)
+    }
+    debugger
+    const ShowCityCard = props.CurrentWeather.map((item, i) => {
+        return (
+            <CityCard city={item.massege} CurrentWeather={props.CurrentWeather[i]}  key ={`${i}gjkfjgk`} />
+        )
+    })
+   
     return(
         <>  
-            <CityCard/>
+            {props.CurrentWeather&&ShowCityCard}
             <div className ={className}>
                 <p>Add city</p>
+                <textarea ref = {cityName} onBlur= {AddNevSity}></textarea>
                 <button></button>
             </div>
         </>
@@ -29,8 +43,9 @@ const YourPlace =(props) => {
 let mapStateToProps = (state) =>{
     return{
         darckMode: state.GlobalSettings.darkMode,
+        CurrentWeather: state.Weather.CurrentWeather
     }
 }
 export default compose(
-    connect(mapStateToProps,{})
+    connect(mapStateToProps,{getCurrentWeatherTC})
 ) (YourPlace)
