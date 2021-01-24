@@ -41,7 +41,7 @@ const CityCard = (props) => {
              case '11n' : return storm 
              case '13d' : return snow 
              case '13n' : return snow 
-             case '50d' : return 
+             case '50d' : return littleCloud
              case '50n' : return littleCloud
              default : return sun  
          }
