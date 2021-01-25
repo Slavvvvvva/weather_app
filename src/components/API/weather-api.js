@@ -6,7 +6,7 @@ const instanse = axios.create({
     params: {
         appid : 'acf754624f6162ea7af2d33749af05cb',
         units : 'metric',
-        lang: 'ru'
+        lang: 'en'
     }
 })
 

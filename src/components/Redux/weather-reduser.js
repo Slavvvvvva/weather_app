@@ -1,7 +1,8 @@
 import { getCarrentWeathaear } from "../API/weather-api"
+import store from 'store'
 
 let initialState = {
-    CurrentWeather : [],
+    CurrentWeather: [],
 }
 
 const SET_CURRENT_WEATHER = 'SET_CURRENT_WEATHER'
@@ -17,17 +18,27 @@ const setCurrentWeatherAC = (city, weatherData) => {
 
 export const getCurrentWeatherTC = (cityName) => {
     return (dispatch) => {
-      getCarrentWeathaear(cityName)
-        .then(responce => {
-           dispatch(setCurrentWeatherAC(cityName,responce))
-        })
+        getCarrentWeathaear(cityName)
+            .then(responce => {
+                dispatch(setCurrentWeatherAC(cityName, responce))
+                let citymass = store.get('city')
+                if (citymass) {
+                    if (citymass.every( i => i !== responce.id )) {
+                        citymass.push(responce.id)
+                    }
+                } else {
+                    citymass = []
+                    citymass.push(responce.id)
+                }
+                store.set('city', citymass)
+            })
     }
-  }
+}
 
 const WeatherReduser = (state = initialState, action) => {
     switch (action.type) {
         case SET_CURRENT_WEATHER: {
-            let stateCopy = {...state}
+            let stateCopy = { ...state }
             stateCopy.CurrentWeather = [...state.CurrentWeather]
             stateCopy.CurrentWeather.push(action.weatherData)
             return stateCopy
@@ -37,4 +48,4 @@ const WeatherReduser = (state = initialState, action) => {
     }
 }
 export default WeatherReduser
-export {setCurrentWeatherAC}
+export { setCurrentWeatherAC }

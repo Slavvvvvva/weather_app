@@ -21,14 +21,15 @@
   align-items: center;
   justify-content: space-around;
   height: calc(100vh - 92px);
+  flex-wrap: wrap;
   background-image: url("./components/IMG/background/Сгруппировать 46.svg");
   background-position: center center;
   background-attachment: fixed;
-  overflow: hidden;
+  overflow: visible;
   overflow-y: scroll;
 }
 .body .content_black {
-  background-image: url("./components/IMG/background/Сгруппировать 49.svg");
+  background-image: url("./components/IMG/background/backgraundDark.jpg");
 }
 
 .body_black {

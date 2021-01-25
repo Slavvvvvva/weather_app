@@ -7,6 +7,10 @@ exports.setCurrentWeatherAC = exports["default"] = exports.getCurrentWeatherTC =
 
 var _weatherApi = require("../API/weather-api");
 
+var _store = _interopRequireDefault(require("store"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -40,6 +44,21 @@ var getCurrentWeatherTC = function getCurrentWeatherTC(cityName) {
   return function (dispatch) {
     (0, _weatherApi.getCarrentWeathaear)(cityName).then(function (responce) {
       dispatch(setCurrentWeatherAC(cityName, responce));
+
+      var citymass = _store["default"].get('city');
+
+      if (citymass) {
+        if (citymass.every(function (i) {
+          return i !== responce.id;
+        })) {
+          citymass.push(responce.id);
+        }
+      } else {
+        citymass = [];
+        citymass.push(responce.id);
+      }
+
+      _store["default"].set('city', citymass);
     });
   };
 };

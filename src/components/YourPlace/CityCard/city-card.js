@@ -13,11 +13,7 @@ import snow from '../../IMG/weatherIcon/SnowingIcon.svg'
 
 
 const CityCard = (props) => {
-
-    /* useEffect(() => {
-        props.getCurrentWeatherTC(props.city)
-    }, []) */
-    debugger
+    
     let cx = classNames.bind(c);
     const className = cx({
         add_card: true,
