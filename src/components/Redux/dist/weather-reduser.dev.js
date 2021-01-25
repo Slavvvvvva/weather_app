@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setCurrentWeatherAC = exports["default"] = exports.getCurrentWeatherTC = void 0;
+exports.setCurrentWeatherAC = exports["default"] = exports.getCurrentWeatherIdTC = exports.getCurrentWeatherTC = void 0;
 
 var _weatherApi = require("../API/weather-api");
 
@@ -30,10 +30,9 @@ var initialState = {
 };
 var SET_CURRENT_WEATHER = 'SET_CURRENT_WEATHER';
 
-var setCurrentWeatherAC = function setCurrentWeatherAC(city, weatherData) {
+var setCurrentWeatherAC = function setCurrentWeatherAC(weatherData) {
   return {
     type: SET_CURRENT_WEATHER,
-    city: city,
     weatherData: weatherData
   };
 };
@@ -43,7 +42,32 @@ exports.setCurrentWeatherAC = setCurrentWeatherAC;
 var getCurrentWeatherTC = function getCurrentWeatherTC(cityName) {
   return function (dispatch) {
     (0, _weatherApi.getCarrentWeathaear)(cityName).then(function (responce) {
-      dispatch(setCurrentWeatherAC(cityName, responce));
+      var citymass = _store["default"].get('city');
+
+      if (citymass) {
+        dispatch(setCurrentWeatherAC(responce));
+
+        if (citymass.every(function (i) {
+          return i !== responce.id;
+        })) {
+          citymass.push(responce.id);
+        }
+      } else {
+        citymass = [];
+        citymass.push(responce.id);
+      }
+
+      _store["default"].set('city', citymass);
+    });
+  };
+};
+
+exports.getCurrentWeatherTC = getCurrentWeatherTC;
+
+var getCurrentWeatherIdTC = function getCurrentWeatherIdTC(cityid) {
+  return function (dispatch) {
+    (0, _weatherApi.getCarrentWeathaearId)(cityid).then(function (responce) {
+      dispatch(setCurrentWeatherAC(responce));
 
       var citymass = _store["default"].get('city');
 
@@ -63,7 +87,7 @@ var getCurrentWeatherTC = function getCurrentWeatherTC(cityName) {
   };
 };
 
-exports.getCurrentWeatherTC = getCurrentWeatherTC;
+exports.getCurrentWeatherIdTC = getCurrentWeatherIdTC;
 
 var WeatherReduser = function WeatherReduser() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;

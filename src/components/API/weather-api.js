@@ -16,3 +16,9 @@ export const getCarrentWeathaear = (cityName = 'Konotop')  => {
         return response.data
     })
 }
+export const getCarrentWeathaearId = (cityID )  => {
+    return instanse.get (`weather?id=${cityID}`)
+    .then(response => {
+        return response.data
+    })
+}

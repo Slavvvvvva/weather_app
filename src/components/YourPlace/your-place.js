@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import y from './y.module.scss'
 import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
-import { getCurrentWeatherTC } from '../Redux/weather-reduser'
+import { getCurrentWeatherIdTC, getCurrentWeatherTC  } from '../Redux/weather-reduser'
 import CityCard from './CityCard/city-card'
 import store from 'store'
 
@@ -12,15 +12,15 @@ const YourPlace = (props) => {
 
 
 
-   /*  useEffect(() => {
-        let citymass = store.get('city')
-        if (citymass) {
-            citymass.forEach((i) => {
-                props.getCurrentWeatherTC(i)
-            })
-        }
-    }, [])
- */
+     useEffect(() => {
+         let citymass = store.get('city')
+         if (citymass) {
+             citymass.forEach((i) => {
+                 props.getCurrentWeatherIdTC(i)
+             })
+         }
+     }, [])
+ 
 
     let cx = classNames.bind(y);
     const className = cx({
@@ -60,5 +60,5 @@ let mapStateToProps = (state) => {
     }
 }
 export default compose(
-    connect(mapStateToProps, { getCurrentWeatherTC })
+    connect(mapStateToProps, { getCurrentWeatherIdTC, getCurrentWeatherTC })
 )(YourPlace)
