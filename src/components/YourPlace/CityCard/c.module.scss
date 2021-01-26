@@ -13,16 +13,19 @@
     background: rgb(220,231,136);
     background: linear-gradient( rgba(186,235,176,0.5034802784222738) 40%, rgba(174,238,244,0.4872389791183295) 78%);
     box-shadow: 0px 0px 28px 0px rgba(0, 0, 0, 0.596);
+    color: black;
+    text-decoration: none;
+    
     p{
         margin-top: 30px;
-        font-size: 30px;
+        font-size: 30px; 
     }
    
 }
 .add_card_dark{
     background: linear-gradient( rgba(0,5,122,1) 1%, rgba(114,28,135,1) 100%);
-    box-shadow: 0px 0px 28px 0px rgba(255, 255, 255, 0.253);  
-  
+    box-shadow: 0px 0px 28px 0px rgba(255, 255, 255, 0.253);
+    color: rgb(255, 255, 255);
 }
 .temperature{
     font-size: 120px;

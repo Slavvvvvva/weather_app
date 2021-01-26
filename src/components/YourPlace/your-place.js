@@ -10,10 +10,10 @@ import store from 'store'
 
 const YourPlace = (props) => {
 
-
+    
 
      useEffect(() => {
-         let citymass = store.get('city')
+        let citymass = store.get('city')
          if (citymass) {
              citymass.forEach((i) => {
                  props.getCurrentWeatherIdTC(i)
