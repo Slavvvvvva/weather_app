@@ -22,8 +22,8 @@ export const getCarrentWeathaearId = (cityID )  => {
         return response.data
     })
 }
-export const getCNTdaysWeathaearId = (cityID, cnt=3 )  => {
-    return instanse.get (`forecast/daily?id=${cityID}&cnt=${cnt}`)
+export const getCNTdaysWeathaearId = ( lat, lon )  => {
+    return instanse.get (`onecall?lat=${lat}&lon=${lon}`)
     .then(response => {
         return response.data
     })

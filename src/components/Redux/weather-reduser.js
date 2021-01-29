@@ -63,9 +63,9 @@ export const getCurrentWeatherIdTC = (cityid) => {
     }
 }
 
-export const getCNTDaysWeatherTC = (cityID) => {
+export const getCNTDaysWeatherTC = (lat, lon) => {
     return (dispatch) => {
-        getCNTdaysWeathaearId(cityID)
+        getCNTdaysWeathaearId(lat, lon)
             .then(responce => {
                 dispatch(setCNTDaysWeatherAC(responce))
             })

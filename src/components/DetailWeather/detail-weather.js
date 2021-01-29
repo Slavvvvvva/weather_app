@@ -8,9 +8,12 @@ import {getCNTDaysWeatherTC, getCurrentWeatherIdTC} from '../Redux/weather-redus
 
 const DatailWeathear = (props) => {
 
+    let lon = props.match.params.sityId.slice(0, props.match.params.sityId.indexOf('_') )
+    let lat = props.match.params.sityId.slice( props.match.params.sityId.indexOf('_')+1 )
+
     useEffect( () => {
-        props.getCNTDaysWeatherTC(props.match.params.sityId)
-    },[props.match.params.sityId])
+        props.getCNTDaysWeatherTC(lat, lon)
+    },[lon, lat])
     
     return (
         <div>

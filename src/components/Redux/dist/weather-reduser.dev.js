@@ -98,9 +98,9 @@ var getCurrentWeatherIdTC = function getCurrentWeatherIdTC(cityid) {
 
 exports.getCurrentWeatherIdTC = getCurrentWeatherIdTC;
 
-var getCNTDaysWeatherTC = function getCNTDaysWeatherTC(cityID) {
+var getCNTDaysWeatherTC = function getCNTDaysWeatherTC(lat, lon) {
   return function (dispatch) {
-    (0, _weatherApi.getCNTdaysWeathaearId)(cityID).then(function (responce) {
+    (0, _weatherApi.getCNTdaysWeathaearId)(lat, lon).then(function (responce) {
       dispatch(setCNTDaysWeatherAC(responce));
     });
   };

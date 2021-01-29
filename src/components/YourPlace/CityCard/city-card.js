@@ -44,7 +44,7 @@ const CityCard = (props) => {
         }
     }
 
-    let sityId = props.CurrentWeather.id
+    let sityCoord = `${props.CurrentWeather.coord.lon}_${props.CurrentWeather.coord.lat}`
 
     if (!props.CurrentWeather) {
         return (
@@ -56,7 +56,7 @@ const CityCard = (props) => {
 
     return (
 
-        <NavLink to = {`/detail/${sityId}`} className={className}>
+        <NavLink to = {`/detail/${sityCoord}`} className={className}>
             <p>{props.CurrentWeather.name}</p>
             <img src={iconSelector()} alt='weather icon' />
             <div className={c.temperature} >

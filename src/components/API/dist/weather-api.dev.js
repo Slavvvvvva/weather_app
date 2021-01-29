@@ -40,9 +40,8 @@ var getCarrentWeathaearId = function getCarrentWeathaearId(cityID) {
 
 exports.getCarrentWeathaearId = getCarrentWeathaearId;
 
-var getCNTdaysWeathaearId = function getCNTdaysWeathaearId(cityID) {
-  var cnt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3;
-  return instanse.get("forecast/daily?id=".concat(cityID, "&cnt=").concat(cnt)).then(function (response) {
+var getCNTdaysWeathaearId = function getCNTdaysWeathaearId(lat, lon) {
+  return instanse.get("onecall?lat=".concat(lat, "&lon=").concat(lon)).then(function (response) {
     return response.data;
   });
 };
