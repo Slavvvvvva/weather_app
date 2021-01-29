@@ -1,8 +1,9 @@
-import { getCarrentWeathaear, getCarrentWeathaearId } from "../API/weather-api"
+import { getCarrentWeathaear, getCarrentWeathaearId, getCNTdaysWeathaearId } from "../API/weather-api"
 import store from 'store'
 
 let initialState = {
     CurrentWeather: [],
+    CNTdaysWeather: null
 }
 
 const SET_CURRENT_WEATHER = 'SET_CURRENT_WEATHER'
@@ -11,6 +12,15 @@ const setCurrentWeatherAC = ( weatherData) => {
         {
             type: SET_CURRENT_WEATHER,
             weatherData: weatherData
+        }
+    )
+}
+const SET_CNTDAYS_WEATHER = 'SET_CNTDAYS_WEATHER'
+const setCNTDaysWeatherAC = (weatherData) => {
+    return (
+        {
+            type: SET_CNTDAYS_WEATHER,
+            weatherData: weatherData,
         }
     )
 }
@@ -53,6 +63,16 @@ export const getCurrentWeatherIdTC = (cityid) => {
     }
 }
 
+export const getCNTDaysWeatherTC = (cityID) => {
+    return (dispatch) => {
+        getCNTdaysWeathaearId(cityID)
+            .then(responce => {
+                dispatch(setCNTDaysWeatherAC(responce))
+            })
+    }
+}
+
+
 const WeatherReduser = (state = initialState, action) => {
     switch (action.type) {
         case SET_CURRENT_WEATHER: {
@@ -61,6 +81,7 @@ const WeatherReduser = (state = initialState, action) => {
             stateCopy.CurrentWeather.push(action.weatherData)
             return stateCopy
         }
+        case SET_CNTDAYS_WEATHER: return {...state, CNTdaysWeather: action.weatherData }
 
         default: return state
     }

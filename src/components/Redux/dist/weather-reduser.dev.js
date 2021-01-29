@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setCurrentWeatherAC = exports["default"] = exports.getCurrentWeatherIdTC = exports.getCurrentWeatherTC = void 0;
+exports.setCurrentWeatherAC = exports["default"] = exports.getCNTDaysWeatherTC = exports.getCurrentWeatherIdTC = exports.getCurrentWeatherTC = void 0;
 
 var _weatherApi = require("../API/weather-api");
 
@@ -26,7 +26,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var initialState = {
-  CurrentWeather: []
+  CurrentWeather: [],
+  CNTdaysWeather: null
 };
 var SET_CURRENT_WEATHER = 'SET_CURRENT_WEATHER';
 
@@ -38,6 +39,14 @@ var setCurrentWeatherAC = function setCurrentWeatherAC(weatherData) {
 };
 
 exports.setCurrentWeatherAC = setCurrentWeatherAC;
+var SET_CNTDAYS_WEATHER = 'SET_CNTDAYS_WEATHER';
+
+var setCNTDaysWeatherAC = function setCNTDaysWeatherAC(weatherData) {
+  return {
+    type: SET_CNTDAYS_WEATHER,
+    weatherData: weatherData
+  };
+};
 
 var getCurrentWeatherTC = function getCurrentWeatherTC(cityName) {
   return function (dispatch) {
@@ -89,6 +98,16 @@ var getCurrentWeatherIdTC = function getCurrentWeatherIdTC(cityid) {
 
 exports.getCurrentWeatherIdTC = getCurrentWeatherIdTC;
 
+var getCNTDaysWeatherTC = function getCNTDaysWeatherTC(cityID) {
+  return function (dispatch) {
+    (0, _weatherApi.getCNTdaysWeathaearId)(cityID).then(function (responce) {
+      dispatch(setCNTDaysWeatherAC(responce));
+    });
+  };
+};
+
+exports.getCNTDaysWeatherTC = getCNTDaysWeatherTC;
+
 var WeatherReduser = function WeatherReduser() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -102,6 +121,11 @@ var WeatherReduser = function WeatherReduser() {
         stateCopy.CurrentWeather.push(action.weatherData);
         return stateCopy;
       }
+
+    case SET_CNTDAYS_WEATHER:
+      return _objectSpread({}, state, {
+        CNTdaysWeather: action.weatherData
+      });
 
     default:
       return state;

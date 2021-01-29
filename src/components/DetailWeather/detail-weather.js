@@ -4,12 +4,18 @@ import d from './d.module.scss'
 import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import {getCNTDaysWeatherTC, getCurrentWeatherIdTC} from '../Redux/weather-reduser'
 
 const DatailWeathear = (props) => {
-    debugger
+
+    useEffect( () => {
+        props.getCNTDaysWeatherTC(props.match.params.sityId)
+    },[props.match.params.sityId])
+    
     return (
         <div>
             Weather  was heart twice {props.match.params.sityId}
+
         </div>
     )
 }
@@ -18,10 +24,10 @@ let mapStateToProps = (state) => {
     
     return {
         darckMode: state.GlobalSettings.darkMode,
-        CurrentWeather: state.Weather.CurrentWeather
+        CNTDaysWeather: state.Weather.CNTdaysWeather
     }
 }
 export default compose(
-    withRouter,
-    connect(mapStateToProps, { })
+    connect(mapStateToProps, { getCNTDaysWeatherTC, getCurrentWeatherIdTC }),
+    withRouter
 )(DatailWeathear)

@@ -5,7 +5,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getCarrentWeathaearId = exports.getCarrentWeathaear = void 0;
+exports.getCNTdaysWeathaearId = exports.getCarrentWeathaearId = exports.getCarrentWeathaear = void 0;
 
 var axios = _interopRequireWildcard(require("axios"));
 
@@ -39,3 +39,12 @@ var getCarrentWeathaearId = function getCarrentWeathaearId(cityID) {
 };
 
 exports.getCarrentWeathaearId = getCarrentWeathaearId;
+
+var getCNTdaysWeathaearId = function getCNTdaysWeathaearId(cityID) {
+  var cnt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3;
+  return instanse.get("forecast/daily?id=".concat(cityID, "&cnt=").concat(cnt)).then(function (response) {
+    return response.data;
+  });
+};
+
+exports.getCNTdaysWeathaearId = getCNTdaysWeathaearId;
