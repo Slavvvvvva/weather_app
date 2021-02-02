@@ -27,7 +27,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var initialState = {
   CurrentWeather: [],
-  CNTdaysWeather: null
+  CNTdaysWeather: []
 };
 var SET_CURRENT_WEATHER = 'SET_CURRENT_WEATHER';
 

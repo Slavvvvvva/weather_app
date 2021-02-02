@@ -1,10 +1,17 @@
 import React, { useEffect } from 'react'
-import { compose } from 'redux';
+import { compose } from 'redux'
 import d from './d.module.scss'
-import classNames from 'classnames/bind';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import classNames from 'classnames/bind'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import {getCNTDaysWeatherTC, getCurrentWeatherIdTC} from '../Redux/weather-reduser'
+import DatailItem from './DatailWeatherItem/detail-weather-item'
+import sun from '../IMG/weatherIcon/SunIcon.svg'
+import littleCloud from '../IMG/weatherIcon/cloudyIcon.svg'
+import cloud from '../IMG/weatherIcon/BigCloud.svg'
+import rain from '../IMG/weatherIcon/RainIcon.svg'
+import storm from '../IMG/weatherIcon/Stromicon.svg'
+import snow from '../IMG/weatherIcon/SnowingIcon.svg'
 
 const DatailWeathear = (props) => {
 
@@ -14,11 +21,65 @@ const DatailWeathear = (props) => {
     useEffect( () => {
         props.getCNTDaysWeatherTC(lat, lon)
     },[lon, lat])
-    
-    return (
-        <div>
-            Weather  was heart twice {props.match.params.sityId}
 
+    const iconSelector = (patch) => {
+        switch (patch) {
+            case '01d': return sun
+            case '01n': return sun
+            case '02d': return littleCloud
+            case '02n': return littleCloud
+            case '03d': return cloud
+            case '03n': return cloud
+            case '04d': return cloud
+            case '04n': return cloud
+            case '09d': return rain
+            case '09n': return rain
+            case '10d': return rain
+            case '10n': return rain
+            case '11d': return storm
+            case '11n': return storm
+            case '13d': return snow
+            case '13n': return snow
+            case '50d': return littleCloud
+            case '50n': return littleCloud
+            default: return sun
+        }
+    }
+
+    let cx = classNames.bind(d);
+    const className = cx({
+        datail_wrapper: true,
+        datail_wrapper_dark: props.darckMode,
+    })
+    
+    if (props.CNTDaysWeather.length == 0){
+        return(
+            <p>Loading</p>
+        )
+    }
+    
+    const ShowDatailItaem = props.CNTDaysWeather.daily.map((item, i) => {
+        return (
+            <DatailItem day={item.dt} icon={iconSelector( item.weather[0].icon)} daytemp= {item.temp.day} descriptions = {item.weather[0].description} key={`${i}gjk`} />
+        )
+    })
+
+    return (
+        <div className = {className} >
+            <div className = {d.current}>
+                <div>
+                    <img src={iconSelector(props.CNTDaysWeather.current.weather[0].icon)} alt ='weather logo'/>
+                    <p> {props.CNTDaysWeather.current.temp} <br/>
+                        {props.CNTDaysWeather.current.weather[0].description}
+                    </p>
+                </div>
+                <div>
+                    <p>City Name</p>
+                </div>
+            </div>
+            <div className = {d.datail}>
+                {ShowDatailItaem}
+            </div>
         </div>
     )
 }

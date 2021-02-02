@@ -3,7 +3,7 @@ import store from 'store'
 
 let initialState = {
     CurrentWeather: [],
-    CNTdaysWeather: null
+    CNTdaysWeather: []
 }
 
 const SET_CURRENT_WEATHER = 'SET_CURRENT_WEATHER'
