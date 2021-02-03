@@ -48,8 +48,12 @@ const DatailWeathear = (props) => {
 
     let cx = classNames.bind(d);
     const className = cx({
-        datail_wrapper: true,
-        datail_wrapper_dark: props.darckMode,
+        current: true,
+        current_dark: props.darckMode,
+    })
+    const classNameDet = cx({
+        datail: true,
+        datail_dark: props.darckMode,
     })
     
     if (props.CNTDaysWeather.length == 0){
@@ -65,19 +69,20 @@ const DatailWeathear = (props) => {
     })
 
     return (
-        <div className = {className} >
-            <div className = {d.current}>
+        <div className = {d.datail_wrapper} >
+            <div className = {className}>
                 <div>
                     <img src={iconSelector(props.CNTDaysWeather.current.weather[0].icon)} alt ='weather logo'/>
-                    <p> {props.CNTDaysWeather.current.temp} <br/>
-                        {props.CNTDaysWeather.current.weather[0].description}
-                    </p>
+                    <div>
+                        <p className = {d.temp}> {Math.round(props.CNTDaysWeather.current.temp)}&#176; </p> 
+                        <p className = {d.des}> {props.CNTDaysWeather.current.weather[0].description} </p>
+                    </div>  
                 </div>
                 <div>
                     <p>City Name</p>
                 </div>
             </div>
-            <div className = {d.datail}>
+            <div className = {classNameDet}>
                 {ShowDatailItaem}
             </div>
         </div>

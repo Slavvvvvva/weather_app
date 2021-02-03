@@ -14,8 +14,31 @@
     div{
         display:flex;
         flex-direction: row;
+        div{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 40px;
+            .temp{
+                font-size: 95px;
+                margin: 0;
+                text-align: center;
+            }
+            .des{
+                width: 200px;
+                font-size: 30px;
+                margin: 0;
+                text-align: center;
+            }
+        } 
     }
+   
 }
+
+.current_dark{
+    background-image: url(../IMG/background/back.jpg)
+}
+
 .datail{
     width: 100%;
     height: 406px;
@@ -24,4 +47,8 @@
     align-items: center;
     border-radius: 0 0 20px 20px;
     background: white;
+    background: linear-gradient(180deg, rgba(113,244,88,0.5034802784222738) 0%, rgba(77,229,244,0.4872389791183295) 100%);
+}
+.datail_dark{
+    background: linear-gradient( rgba(0,5,122,1) 1%, rgba(114,28,135,1) 100%);
 }
