@@ -4,6 +4,8 @@ import h from './h.module.scss'
 import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
 import {chaingeDarckModeAC} from '../Redux/global-settings-reduser'
+import logo from '../IMG/weatherIcon/AppLogo.svg'
+import { NavLink } from 'react-router-dom';
 
 const Header = (props) => {
 
@@ -16,19 +18,22 @@ const Header = (props) => {
     const ChaingeMode = () =>{
         props.chaingeDarckModeAC()
     }
-
+    
+    let time = new Date()
+    
     return(
         <>
-        <div>
+        <NavLink to = {`/`} className = {h.logo}>
+            <img src = {logo} alt ='app logo'/>
             <p>MiniWeathear</p>
-        </div>
+        </NavLink>
         <div>
-            <p>Today date</p>
+            <p className = {h.time}>{time.toUTCString().slice(0,16)}</p>
         </div>
-        <div>
-            <span>Light</span>
+        <div className = {h.chainge_mode}>
+            <p>Light</p>
             <div className ={className} onClick = {ChaingeMode}></div>
-            <span>Dark</span>
+            <p>Dark</p>
         </div>
         </>
     )

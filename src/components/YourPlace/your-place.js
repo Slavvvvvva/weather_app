@@ -12,7 +12,6 @@ const YourPlace = (props) => {
 
      useEffect(() => {
          let citymass = store.get('city')
-         debugger 
          if (citymass && (props.CurrentWeather.length == 0 )) {
              //add chack props 
              citymass.forEach((i) => {

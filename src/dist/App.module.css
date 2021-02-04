@@ -12,6 +12,7 @@
   display: flex;
   background-color: white;
   justify-content: space-between;
+  align-items: center;
 }
 .body .head_black {
   background-color: #2B244D;

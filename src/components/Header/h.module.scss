@@ -4,5 +4,28 @@
     background-image: url('../IMG/background/Сгруппировать\ 47.png')
 }
 .chainge_mode_darck{
+    width: 59px;
     background-image: url('../IMG/background/Сгруппировать\ 48.png')
+}
+.chainge_mode{
+    display: flex;
+    margin-right: 30px;
+    p{
+        font-weight:normal;
+        font-size: 18px;
+        margin: 8px;
+    }
+}
+.time{
+    font-size: 30px;
+}
+.logo{
+    display: flex;
+    margin-left: 48px;
+    text-decoration: none;
+    color: black;
+    p{
+        font-size: 30px;
+        margin-left: 30px;
+    }
 }
