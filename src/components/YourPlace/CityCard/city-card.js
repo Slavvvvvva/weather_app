@@ -4,6 +4,7 @@ import c from './c.module.scss'
 import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
 import { getCurrentWeatherTC } from '../../Redux/weather-reduser'
+import {chaingeActiveCityAC} from '../../Redux/global-settings-reduser'
 import sun from '../../IMG/weatherIcon/SunIcon.svg'
 import littleCloud from '../../IMG/weatherIcon/cloudyIcon.svg'
 import cloud from '../../IMG/weatherIcon/BigCloud.svg'
@@ -57,7 +58,7 @@ const CityCard = (props) => {
 
     return (
 
-        <NavLink to = {`/detail/${sityCoord}`} className={className}>
+        <NavLink to = {`/detail/${sityCoord}`} className={className} onClick = {()=> props.chaingeActiveCityAC(props.CurrentWeather.name)}>
             <p>{props.CurrentWeather.name}</p>
             <img src={iconSelector()} alt='weather icon' />
             <div className={c.temperature} >
@@ -65,8 +66,8 @@ const CityCard = (props) => {
             </div>
             <div className={c.des}> {props.CurrentWeather.weather[0].description}</div>
             <div className={c.minmax} >
-                <div className={c.min}>{props.CurrentWeather.main.temp_min}</div>
-                <div className={c.max}>{props.CurrentWeather.main.temp_max}</div>
+                <div className={c.min}>{Math.round(props.CurrentWeather.main.temp_min)}</div>
+                <div className={c.max}>{Math.round(props.CurrentWeather.main.temp_max)}</div>
             </div>
         </NavLink>
 
@@ -79,5 +80,5 @@ let mapStateToProps = (state) => {
     }
 }
 export default compose(
-    connect(mapStateToProps, { getCurrentWeatherTC })
+    connect(mapStateToProps, { getCurrentWeatherTC, chaingeActiveCityAC })
 )(CityCard)

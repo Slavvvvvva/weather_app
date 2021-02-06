@@ -34,6 +34,9 @@
   margin: 0;
   text-align: center;
 }
+.current .city_name {
+  font-size: 40px;
+}
 
 .current_dark {
   background-image: url(../IMG/background/back.jpg);

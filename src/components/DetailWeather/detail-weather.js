@@ -78,8 +78,8 @@ const DatailWeathear = (props) => {
                         <p className = {d.des}> {props.CNTDaysWeather.current.weather[0].description} </p>
                     </div>  
                 </div>
-                <div>
-                    <p>City Name</p>
+                <div className = {d.city_name}>
+                    <p>{props.activCity}</p>
                 </div>
             </div>
             <div className = {classNameDet}>
@@ -93,6 +93,7 @@ let mapStateToProps = (state) => {
     
     return {
         darckMode: state.GlobalSettings.darkMode,
+        activCity: state.GlobalSettings.activeCityName,
         CNTDaysWeather: state.Weather.CNTdaysWeather
     }
 }
