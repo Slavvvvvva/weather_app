@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .datail_wrapper {
   width: 1218px;
   display: flex;
@@ -10,8 +11,10 @@
   border-radius: 20px 20px 0 0;
   background: linear-gradient(rgba(186, 235, 176, 0.5034802784) 40%, rgba(174, 238, 244, 0.4872389791) 78%);
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
+  position: relative;
 }
 .current div {
   display: flex;
@@ -39,20 +42,49 @@
 }
 
 .current_dark {
-  background-image: url(../IMG/background/back.jpg);
+  background: rgba(76, 51, 185, 0.199);
 }
 
 .datail {
   width: 100%;
   height: 406px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
+  overflow-y: auto;
   border-radius: 0 0 20px 20px;
   background: white;
   background: linear-gradient(180deg, #7ef167 0%, #4de5f4 100%);
 }
+.datail::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
 
 .datail_dark {
   background: linear-gradient(#00057a 1%, #721c87 100%);
+}
+
+.chainge_mode {
+  display: flex;
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  margin-left: -118px;
+}
+.chainge_mode p {
+  font-weight: normal;
+  font-size: 18px;
+  margin: 8px;
+}
+.chainge_mode .chainge_mode_white {
+  width: 61px;
+  height: 30px;
+  margin-left: 0px;
+  background-image: url("../IMG/background/Сгруппировать 47.png");
+}
+.chainge_mode .chainge_mode_darck {
+  width: 59px;
+  background-image: url("../IMG/background/Сгруппировать 48.png");
 }

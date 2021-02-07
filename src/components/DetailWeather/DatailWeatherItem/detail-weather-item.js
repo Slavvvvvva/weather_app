@@ -3,12 +3,15 @@ import di from './di.module.scss'
 import classNames from 'classnames/bind'
 
 const DatailItem  = (props) => {
-    let date = new Date(props.day*1000)
-    let day = date.toDateString().slice( 0 ,3)
-   
+    let cx = classNames.bind(di);
+    const className = cx({
+        wrapper: true,
+        wrapper_hourly: props.hourly,
+    })
+
     return (
-        <div className = {di.wrapper}>
-            <p className = {di.day}>{day}</p>
+        <div className = {className}>
+            <p className = {di.day}>{props.day}</p>
             <div>
                 <img src = {props.icon} alt = 'weathaer icon' />
             </div>

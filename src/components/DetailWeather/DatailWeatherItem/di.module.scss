@@ -27,3 +27,11 @@
         height: 36px;
     }
 }
+.wrapper_hourly{
+    margin: 20px;
+    margin-top: 53px;
+    &:nth-last-child(-n+8){
+        margin-bottom: 53px;
+    }
+
+}

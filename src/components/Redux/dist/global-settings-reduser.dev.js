@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.chaingeActiveCityAC = exports.chaingeDarckModeAC = exports["default"] = void 0;
+exports.TogleDetailWeatherAC = exports.chaingeActiveCityAC = exports.chaingeDarckModeAC = exports["default"] = void 0;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -13,7 +13,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var initialState = {
   darkMode: false,
-  activeCityName: null
+  activeCityName: null,
+  dailyHourly: false
 };
 var CHAINGE_DARK_MODE = 'CHAINGE_DARK_MODE';
 
@@ -34,6 +35,15 @@ var chaingeActiveCityAC = function chaingeActiveCityAC(city) {
 };
 
 exports.chaingeActiveCityAC = chaingeActiveCityAC;
+var TOGLE_DETEIL_WEATHER = 'TOGLE_DETEIL_WEATHER';
+
+var TogleDetailWeatherAC = function TogleDetailWeatherAC() {
+  return {
+    type: TOGLE_DETEIL_WEATHER
+  };
+};
+
+exports.TogleDetailWeatherAC = TogleDetailWeatherAC;
 
 var GlobalSettingsReduser = function GlobalSettingsReduser() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -48,6 +58,11 @@ var GlobalSettingsReduser = function GlobalSettingsReduser() {
     case SET_ACTIVE_CITY:
       return _objectSpread({}, state, {
         activeCityName: action.city
+      });
+
+    case TOGLE_DETEIL_WEATHER:
+      return _objectSpread({}, state, {
+        dailyHourly: !state.dailyHourly
       });
 
     default:

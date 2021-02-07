@@ -27,7 +27,7 @@
   background-position: center center;
   background-attachment: fixed;
   overflow: visible;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .body .content_black {
   background-image: url("./components/IMG/background/backgraundDark.jpg");
