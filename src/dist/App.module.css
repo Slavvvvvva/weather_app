@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .body {
   max-width: 1920px;
   margin: 0 auto;
@@ -23,7 +22,7 @@
   justify-content: space-around;
   height: calc(100vh - 92px);
   flex-wrap: wrap;
-  background-image: url("./components/IMG/background/Сгруппировать 46.svg");
+  background-image: url("./components/IMG/background/50.svg");
   background-position: center center;
   background-attachment: fixed;
   overflow: visible;

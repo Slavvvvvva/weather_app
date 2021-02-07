@@ -74,7 +74,7 @@ const DatailWeathear = (props) => {
     })
     const ShowDatailItaemHourly = props.CNTDaysWeather.hourly.map((item, i) => {
         return (
-            <DatailItem day={new Date(item.dt*1000).toLocaleString().slice(12,17)} icon={iconSelector(item.weather[0].icon)} daytemp={item.temp} descriptions={item.weather[0].description} hourly ={props.dispayMode} key={`${i}gjk`} />
+            <DatailItem day={`${new Date(item.dt*1000).getHours()}:00`} icon={iconSelector(item.weather[0].icon)} daytemp={item.temp} descriptions={item.weather[0].description} hourly ={props.dispayMode} key={`${i}gjk`} />
         )
     })
 
