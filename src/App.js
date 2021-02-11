@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 import s from './App.module.scss';
 import { connect } from 'react-redux'
 import { compose } from 'redux';
@@ -26,7 +26,7 @@ const App = (props) => {
 })
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className={classNameB}>
         <div className={classNameH}>
           <Header/>
@@ -42,7 +42,7 @@ const App = (props) => {
           </Switch>
         </div>
       </div>
-    </BrowserRouter>
+    </HashRouter>
 
   )
 
