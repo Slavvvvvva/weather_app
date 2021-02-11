@@ -9,11 +9,10 @@ import store from 'store'
 
 
 const YourPlace = (props) => {
-
+    
      useEffect(() => {
-         let citymass = store.get('city')
+        let citymass = store.get('city')
          if (citymass && (props.CurrentWeather.length == 0 )) {
-             //add chack props 
              citymass.forEach((i) => {
                  props.getCurrentWeatherIdTC(i)
              })
@@ -44,8 +43,10 @@ const YourPlace = (props) => {
             {props.CurrentWeather && ShowCityCard}
             <div className={className}>
                 <p>Add city</p>
-                <textarea ref={cityName} onBlur={AddNevSity}></textarea>
-                <button></button>
+                <form className = {y.form}  onSubmit={AddNevSity} ref={cityName}>
+                    <input className = {y.input} ></input>
+                    <button></button>
+                </form>
             </div>
         </>
 

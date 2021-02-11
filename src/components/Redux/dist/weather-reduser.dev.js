@@ -53,9 +53,9 @@ var getCurrentWeatherTC = function getCurrentWeatherTC(cityName) {
     (0, _weatherApi.getCarrentWeathaear)(cityName).then(function (responce) {
       var citymass = _store["default"].get('city');
 
-      if (citymass) {
-        dispatch(setCurrentWeatherAC(responce));
+      dispatch(setCurrentWeatherAC(responce));
 
+      if (citymass) {
         if (citymass.every(function (i) {
           return i !== responce.id;
         })) {

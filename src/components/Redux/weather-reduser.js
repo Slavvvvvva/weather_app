@@ -30,8 +30,8 @@ export const getCurrentWeatherTC = (cityName) => {
         getCarrentWeathaear(cityName)
             .then(responce => {
                 let citymass = store.get('city')
+                dispatch(setCurrentWeatherAC(responce))
                 if (citymass) {
-                    dispatch(setCurrentWeatherAC(responce))
                     if (citymass.every( i => i !== responce.id )) {
                         citymass.push(responce.id)
                     }
