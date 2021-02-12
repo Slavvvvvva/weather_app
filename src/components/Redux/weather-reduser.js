@@ -1,5 +1,6 @@
 import { getCarrentWeathaear, getCarrentWeathaearId, getCNTdaysWeathaearId } from "../API/weather-api"
 import store from 'store'
+import { stopSubmit } from 'redux-form'
 
 let initialState = {
     CurrentWeather: [],
@@ -7,7 +8,7 @@ let initialState = {
 }
 
 const SET_CURRENT_WEATHER = 'SET_CURRENT_WEATHER'
-const setCurrentWeatherAC = ( weatherData) => {
+const setCurrentWeatherAC = (weatherData) => {
     return (
         {
             type: SET_CURRENT_WEATHER,
@@ -29,18 +30,26 @@ export const getCurrentWeatherTC = (cityName) => {
     return (dispatch) => {
         getCarrentWeathaear(cityName)
             .then(responce => {
-                let citymass = store.get('city')
-                dispatch(setCurrentWeatherAC(responce))
-                if (citymass) {
-                    if (citymass.every( i => i !== responce.id )) {
+                debugger
+                if (responce.cod === 200) {
+                    let citymass = store.get('city')
+                    dispatch(setCurrentWeatherAC(responce))
+                    if (citymass) {
+                        if (citymass.every(i => i !== responce.id)) {
+                            citymass.push(responce.id)
+                        }
+                    } else {
+                        citymass = []
                         citymass.push(responce.id)
                     }
-                } else {
-                    citymass = []
-                    citymass.push(responce.id)
+                    store.set('city', citymass)
                 }
-                store.set('city', citymass)
             })
+            .catch( responce => {
+                console.log(responce)
+                    dispatch(stopSubmit('AddCity', { 'cityName': 'city not found' }))
+            }) 
+            
     }
 }
 
@@ -51,7 +60,7 @@ export const getCurrentWeatherIdTC = (cityid) => {
                 dispatch(setCurrentWeatherAC(responce))
                 let citymass = store.get('city')
                 if (citymass) {
-                    if (citymass.every( i => i !== responce.id )) {
+                    if (citymass.every(i => i !== responce.id)) {
                         citymass.push(responce.id)
                     }
                 } else {
@@ -81,7 +90,7 @@ const WeatherReduser = (state = initialState, action) => {
             stateCopy.CurrentWeather.push(action.weatherData)
             return stateCopy
         }
-        case SET_CNTDAYS_WEATHER: return {...state, CNTdaysWeather: action.weatherData }
+        case SET_CNTDAYS_WEATHER: return { ...state, CNTdaysWeather: action.weatherData }
 
         default: return state
     }

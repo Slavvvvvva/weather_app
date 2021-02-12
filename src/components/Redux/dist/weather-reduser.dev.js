@@ -9,6 +9,8 @@ var _weatherApi = require("../API/weather-api");
 
 var _store = _interopRequireDefault(require("store"));
 
+var _reduxForm = require("redux-form");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -51,22 +53,31 @@ var setCNTDaysWeatherAC = function setCNTDaysWeatherAC(weatherData) {
 var getCurrentWeatherTC = function getCurrentWeatherTC(cityName) {
   return function (dispatch) {
     (0, _weatherApi.getCarrentWeathaear)(cityName).then(function (responce) {
-      var citymass = _store["default"].get('city');
+      debugger;
 
-      dispatch(setCurrentWeatherAC(responce));
+      if (responce.cod === 200) {
+        var citymass = _store["default"].get('city');
 
-      if (citymass) {
-        if (citymass.every(function (i) {
-          return i !== responce.id;
-        })) {
+        dispatch(setCurrentWeatherAC(responce));
+
+        if (citymass) {
+          if (citymass.every(function (i) {
+            return i !== responce.id;
+          })) {
+            citymass.push(responce.id);
+          }
+        } else {
+          citymass = [];
           citymass.push(responce.id);
         }
-      } else {
-        citymass = [];
-        citymass.push(responce.id);
-      }
 
-      _store["default"].set('city', citymass);
+        _store["default"].set('city', citymass);
+      }
+    })["catch"](function (responce) {
+      console.log(responce);
+      dispatch((0, _reduxForm.stopSubmit)('AddCity', {
+        'cityName': 'city not found'
+      }));
     });
   };
 };

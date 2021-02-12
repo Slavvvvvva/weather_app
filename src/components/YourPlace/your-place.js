@@ -1,24 +1,27 @@
 import React, { useEffect } from 'react'
-import { compose } from 'redux';
+import { reduxForm, Field } from 'redux-form'
+import { compose } from 'redux'
 import y from './y.module.scss'
-import classNames from 'classnames/bind';
-import { connect } from 'react-redux';
-import { getCurrentWeatherIdTC, getCurrentWeatherTC  } from '../Redux/weather-reduser'
+import classNames from 'classnames/bind'
+import { connect } from 'react-redux'
+import { getCurrentWeatherIdTC, getCurrentWeatherTC } from '../Redux/weather-reduser'
 import CityCard from './CityCard/city-card'
 import store from 'store'
+import { Input } from '../Util/form'
+
 
 
 const YourPlace = (props) => {
-    
-     useEffect(() => {
+
+    useEffect(() => {
         let citymass = store.get('city')
-         if (citymass && (props.CurrentWeather.length == 0 )) {
-             citymass.forEach((i) => {
-                 props.getCurrentWeatherIdTC(i)
-             })
-         }
-     }, [])
- 
+        if (citymass && (props.CurrentWeather.length == 0)) {
+            citymass.forEach((i) => {
+                props.getCurrentWeatherIdTC(i)
+            })
+        }
+    }, [])
+
 
     let cx = classNames.bind(y);
     const className = cx({
@@ -26,10 +29,8 @@ const YourPlace = (props) => {
         add_card_dark: props.darckMode
     })
 
-    let cityName = React.createRef()
-
-    const AddNevSity = () => {
-        props.getCurrentWeatherTC(cityName.current.value)
+    const AddNewCity= (formData) => {
+        props.getCurrentWeatherTC(formData.cityName)
     }
 
     const ShowCityCard = props.CurrentWeather.map((item, i) => {
@@ -42,16 +43,22 @@ const YourPlace = (props) => {
         <>
             {props.CurrentWeather && ShowCityCard}
             <div className={className}>
-                <p>Add city</p>
-                <form className = {y.form}  onSubmit={AddNevSity} ref={cityName}>
-                    <input className = {y.input} ></input>
-                    <button></button>
-                </form>
+                <AddCityCardReduxForm onSubmit={AddNewCity} {...props}/>
             </div>
         </>
 
     )
 }
+
+const AddCityCardForm = (props) => {
+    return (
+        <form className={y.form} onSubmit={props.handleSubmit} >
+            <Field placeholder={'ADD CITY'} name={'cityName'} component={Input} className={y.input}></Field>
+            <button></button>
+        </form>
+    )
+}
+const AddCityCardReduxForm = reduxForm({ form:'AddCity' })(AddCityCardForm)
 
 let mapStateToProps = (state) => {
     return {

@@ -13,12 +13,14 @@ var _globalSettingsReduser = _interopRequireDefault(require("./global-settings-r
 
 var _weatherReduser = _interopRequireDefault(require("./weather-reduser"));
 
+var _reduxForm = require("redux-form");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-//import {reducer as formReducer} from 'redux-form' 
 var redusers = (0, _redux.combineReducers)({
   GlobalSettings: _globalSettingsReduser["default"],
-  Weather: _weatherReduser["default"]
+  Weather: _weatherReduser["default"],
+  form: _reduxForm.reducer
 });
 var composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || _redux.compose;
 var store = (0, _redux.createStore)(redusers,
