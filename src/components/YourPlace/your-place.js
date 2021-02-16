@@ -50,10 +50,18 @@ const YourPlace = (props) => {
     )
 }
 
+
+let notAmpty = (value) => {
+    if (value) return undefined
+    return (
+        <p className = {y.valdation}>you can't send an empty field</p>
+    )
+}
+
 const AddCityCardForm = (props) => {
     return (
         <form className={y.form} onSubmit={props.handleSubmit} >
-            <Field placeholder={'ADD CITY'} name={'cityName'} component={Input} className={y.input}></Field>
+            <Field placeholder={'ADD CITY'} name={'cityName'} component={Input} className={y.input} validate = {[notAmpty]}></Field>
             <button></button>
         </form>
     )

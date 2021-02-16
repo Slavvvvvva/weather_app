@@ -25,3 +25,9 @@
 .formControl span {
   margin-top: 10px;
 }
+
+.error p {
+  font-size: 17px;
+  margin: 5px 0 0 0;
+  color: red;
+}

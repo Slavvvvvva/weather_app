@@ -1,6 +1,6 @@
 import { getCarrentWeathaear, getCarrentWeathaearId, getCNTdaysWeathaearId } from "../API/weather-api"
 import store from 'store'
-import { stopSubmit } from 'redux-form'
+import { stopSubmit, reset } from 'redux-form'
 
 let initialState = {
     CurrentWeather: [],
@@ -30,26 +30,26 @@ export const getCurrentWeatherTC = (cityName) => {
     return (dispatch) => {
         getCarrentWeathaear(cityName)
             .then(responce => {
-                debugger
                 if (responce.cod === 200) {
                     let citymass = store.get('city')
-                    dispatch(setCurrentWeatherAC(responce))
-                    if (citymass) {
+                    const chackDoubleCard =(citymass=[]) => {
                         if (citymass.every(i => i !== responce.id)) {
                             citymass.push(responce.id)
+                            dispatch(setCurrentWeatherAC(responce))
+                            store.set('city', citymass)
+                            dispatch(reset('AddCity'))
                         }
-                    } else {
-                        citymass = []
-                        citymass.push(responce.id)
+                        else{
+                            dispatch(stopSubmit('AddCity', { 'cityName': 'you already add this city' }))
+                        }
                     }
-                    store.set('city', citymass)
+                    chackDoubleCard(citymass)
                 }
             })
             .catch( responce => {
                 console.log(responce)
-                    dispatch(stopSubmit('AddCity', { 'cityName': 'city not found' }))
+                dispatch(stopSubmit('AddCity', { 'cityName': 'city not found' }))
             }) 
-            
     }
 }
 

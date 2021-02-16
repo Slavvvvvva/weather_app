@@ -53,25 +53,29 @@ var setCNTDaysWeatherAC = function setCNTDaysWeatherAC(weatherData) {
 var getCurrentWeatherTC = function getCurrentWeatherTC(cityName) {
   return function (dispatch) {
     (0, _weatherApi.getCarrentWeathaear)(cityName).then(function (responce) {
-      debugger;
-
       if (responce.cod === 200) {
         var citymass = _store["default"].get('city');
 
-        dispatch(setCurrentWeatherAC(responce));
+        var chackDoubleCard = function chackDoubleCard() {
+          var citymass = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
-        if (citymass) {
           if (citymass.every(function (i) {
             return i !== responce.id;
           })) {
             citymass.push(responce.id);
-          }
-        } else {
-          citymass = [];
-          citymass.push(responce.id);
-        }
+            dispatch(setCurrentWeatherAC(responce));
 
-        _store["default"].set('city', citymass);
+            _store["default"].set('city', citymass);
+
+            dispatch((0, _reduxForm.reset)('AddCity'));
+          } else {
+            dispatch((0, _reduxForm.stopSubmit)('AddCity', {
+              'cityName': 'you already add this city'
+            }));
+          }
+        };
+
+        chackDoubleCard(citymass);
       }
     })["catch"](function (responce) {
       console.log(responce);
