@@ -3,7 +3,7 @@ import { compose } from 'redux'
 import c from './c.module.scss'
 import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
-import { getCurrentWeatherTC } from '../../Redux/weather-reduser'
+import { getCurrentWeatherTC, delCurrentWeatherAC } from '../../Redux/weather-reduser'
 import {chaingeActiveCityAC} from '../../Redux/global-settings-reduser'
 import sun from '../../IMG/weatherIcon/SunIcon.svg'
 import littleCloud from '../../IMG/weatherIcon/cloudyIcon.svg'
@@ -20,6 +20,10 @@ const CityCard = (props) => {
     const className = cx({
         add_card: true,
         add_card_dark: props.darckMode
+    })
+    const classNameB = cx({
+        delate: true,
+        delate_darck: props.darckMode
     })
     const iconSelector = () => {
         switch (props.CurrentWeather.weather[0].icon) {
@@ -54,10 +58,13 @@ const CityCard = (props) => {
             </div>
         )
     }
-  
+
+    const DaliteCard = () => {
+        props.delCurrentWeatherAC(props.CurrentWeather.id)
+    }
 
     return (
-
+        <div className={c.wrapper}>
         <NavLink to = {`/detail/${sityCoord}`} className={className} onClick = {()=> props.chaingeActiveCityAC(props.CurrentWeather.name)}>
             <p>{props.CurrentWeather.name}</p>
             <img src={iconSelector()} alt='weather icon' />
@@ -68,9 +75,10 @@ const CityCard = (props) => {
             <div className={c.minmax} >
                 <div className={c.min}>{Math.round(props.CurrentWeather.main.temp_min)}</div>
                 <div className={c.max}>{Math.round(props.CurrentWeather.main.temp_max)}</div>
-            </div>
+            </div>       
         </NavLink>
-
+        <button className= {classNameB} onClick={DaliteCard} key={`${props.CurrentWeather.id}jfkcncx`}></button>
+        </div>
     )
 }
 
@@ -80,5 +88,5 @@ let mapStateToProps = (state) => {
     }
 }
 export default compose(
-    connect(mapStateToProps, { getCurrentWeatherTC, chaingeActiveCityAC })
+    connect(mapStateToProps, { getCurrentWeatherTC, chaingeActiveCityAC, delCurrentWeatherAC })
 )(CityCard)

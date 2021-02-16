@@ -26,6 +26,16 @@ const setCNTDaysWeatherAC = (weatherData) => {
     )
 }
 
+const DELATE_CURRENT_WEATHER = 'DELATE_CURRENT_WEATHER'
+const delCurrentWeatherAC = (id) => {
+    return (
+        {
+            type: DELATE_CURRENT_WEATHER,
+            id: id,
+        }
+    )
+}
+
 export const getCurrentWeatherTC = (cityName) => {
     return (dispatch) => {
         getCarrentWeathaear(cityName)
@@ -91,9 +101,15 @@ const WeatherReduser = (state = initialState, action) => {
             return stateCopy
         }
         case SET_CNTDAYS_WEATHER: return { ...state, CNTdaysWeather: action.weatherData }
+        case DELATE_CURRENT_WEATHER:
+            let citymass = store.get('city')
+            store.set('city', citymass.filter(item => item !== action.id ))
+            return {...state, 
+            CurrentWeather: state.CurrentWeather.filter(item => item.id !== action.id )       
+        }
 
         default: return state
     }
 }
 export default WeatherReduser
-export { setCurrentWeatherAC }
+export { setCurrentWeatherAC, delCurrentWeatherAC }

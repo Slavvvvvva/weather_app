@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setCurrentWeatherAC = exports["default"] = exports.getCNTDaysWeatherTC = exports.getCurrentWeatherIdTC = exports.getCurrentWeatherTC = void 0;
+exports.delCurrentWeatherAC = exports.setCurrentWeatherAC = exports["default"] = exports.getCNTDaysWeatherTC = exports.getCurrentWeatherIdTC = exports.getCurrentWeatherTC = void 0;
 
 var _weatherApi = require("../API/weather-api");
 
@@ -49,6 +49,17 @@ var setCNTDaysWeatherAC = function setCNTDaysWeatherAC(weatherData) {
     weatherData: weatherData
   };
 };
+
+var DELATE_CURRENT_WEATHER = 'DELATE_CURRENT_WEATHER';
+
+var delCurrentWeatherAC = function delCurrentWeatherAC(id) {
+  return {
+    type: DELATE_CURRENT_WEATHER,
+    id: id
+  };
+};
+
+exports.delCurrentWeatherAC = delCurrentWeatherAC;
 
 var getCurrentWeatherTC = function getCurrentWeatherTC(cityName) {
   return function (dispatch) {
@@ -140,6 +151,19 @@ var WeatherReduser = function WeatherReduser() {
     case SET_CNTDAYS_WEATHER:
       return _objectSpread({}, state, {
         CNTdaysWeather: action.weatherData
+      });
+
+    case DELATE_CURRENT_WEATHER:
+      var citymass = _store["default"].get('city');
+
+      _store["default"].set('city', citymass.filter(function (item) {
+        return item !== action.id;
+      }));
+
+      return _objectSpread({}, state, {
+        CurrentWeather: state.CurrentWeather.filter(function (item) {
+          return item.id !== action.id;
+        })
       });
 
     default:

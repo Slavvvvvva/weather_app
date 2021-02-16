@@ -1,5 +1,32 @@
 .wrapper {
   display: flex;
+  position: relative;
+}
+.wrapper .delate {
+  position: absolute;
+  top: 60px;
+  right: 60px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  background: url(../../IMG/background/del.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 115%;
+  opacity: 0.3;
+}
+.wrapper .delate:hover {
+  opacity: 1;
+}
+.wrapper .delate:focus {
+  outline: none;
+}
+.wrapper .delate_darck {
+  background: url(../../IMG/background/deldarck.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 115%;
 }
 
 .add_card {
@@ -16,6 +43,7 @@
   box-shadow: 0px 0px 28px 0px rgba(0, 0, 0, 0.596);
   color: black;
   text-decoration: none;
+  position: relative;
 }
 .add_card p {
   margin-top: 30px;

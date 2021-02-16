@@ -14,6 +14,10 @@ const Header = (props) => {
         chainge_mode_white: true,
         chainge_mode_darck: props.darckMode
     })
+    const classNameL =cx({
+        logo: true,
+        logo_darck: props.darckMode
+    })
 
     const ChaingeMode = () =>{
         props.chaingeDarckModeAC()
@@ -23,7 +27,7 @@ const Header = (props) => {
     
     return(
         <>
-        <NavLink to = {`/`} className = {h.logo}>
+        <NavLink to = {`/`} className = {classNameL}>
             <img src = {logo} alt ='app logo'/>
             <p>MiniWeathear</p>
         </NavLink>
