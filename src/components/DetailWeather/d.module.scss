@@ -2,6 +2,7 @@
     width: 1218px;
     display: flex;
     flex-direction: column;
+    padding:18px;
 }
 .current{
     width: 100%;
@@ -36,6 +37,11 @@
     }
     .city_name{
         font-size: 40px;
+        p{
+            margin:0;
+            margin-bottom:60px;
+        }
+        
     }
 }
 

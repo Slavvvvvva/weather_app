@@ -21,6 +21,7 @@
 
 .time {
   font-size: 30px;
+  text-align: center;
 }
 
 .logo {
@@ -36,4 +37,24 @@
 
 .logo_darck p {
   color: white;
+}
+
+@media screen and (max-width: 900px) {
+  .logo {
+    margin: 20px;
+  }
+  .logo p {
+    display: none;
+  }
+
+  .chainge_mode {
+    margin: 20px;
+  }
+  .chainge_mode p {
+    display: none;
+  }
+
+  .time {
+    font-size: 20px;
+  }
 }
