@@ -67,10 +67,13 @@ const CityCard = (props) => {
         <div className={c.wrapper}>
         <NavLink to = {`/detail/${sityCoord}`} className={className} onClick = {()=> props.chaingeActiveCityAC(props.CurrentWeather.name)}>
             <p>{props.CurrentWeather.name}</p>
-            <img src={iconSelector()} alt='weather icon' />
-            <div className={c.temperature} >
-                {Math.round(props.CurrentWeather.main.temp)}
+            <div className={c.weather_icon}>
+                <img src={iconSelector()} alt='weather icon' />
             </div>
+            
+            <p className={c.temperature} >
+                {Math.round(props.CurrentWeather.main.temp)}&#176;
+            </p>
             <div className={c.des}> {props.CurrentWeather.weather[0].description}</div>
             <div className={c.minmax} >
                 <div className={c.min}>{Math.round(props.CurrentWeather.main.temp_min)}</div>

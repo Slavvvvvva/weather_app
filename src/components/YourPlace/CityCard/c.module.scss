@@ -33,7 +33,7 @@
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
-    min-width: 474px;
+    width: 474px;
     height: 774px;
     margin: 40px;
     border-radius: 40px;
@@ -54,14 +54,11 @@
     box-shadow: 0px 0px 28px 0px rgba(255, 255, 255, 0.253);
     color: rgb(255, 255, 255);
 }
-.temperature{
+p.temperature{
     font-size: 120px;
+    margin:0;
     margin-top:20px;
-    padding-right: 40px;
-    padding-left: 40px;
-    background-image: url('../../IMG/background/Celsius\ icon.svg');
-    background-repeat: no-repeat;
-    background-position: right top;
+    
 }
 .des{
     font-size: 30px;
@@ -88,5 +85,46 @@
         background-position: center 13px;
         padding:25px;
        
+    }
+}
+@media screen and (max-width: 900px) {
+    .add_card{
+        width: 340px;
+        height: 572px;
+        padding: 10px;
+        margin: 20px;
+        p{
+            margin:0;
+            margin-top: 15px;
+            font-size: 25px; 
+        }
+        .weather_icon{
+            height: 180px;
+            width: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            img{
+                height: 180px;
+                width: 180px;
+            }
+        }
+    }
+    p.temperature{
+        font-size: 90px;
+        margin: 0;
+    }
+    .minmax{
+        margin: 0;
+        font-size: 40px;
+        
+    }
+    .wrapper{
+        .delate{
+            top: 40px;
+            right: 40px;
+            width: 30px;
+            height: 30px;
+        }
     }
 }   
