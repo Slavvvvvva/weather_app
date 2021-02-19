@@ -32,3 +32,10 @@
         color: rgb(255, 0, 0);
     }
 }
+@media screen and (max-width: 900px) {
+    .formControl{
+        input{
+            margin-top: 25px;
+        }
+    }
+}

@@ -1,6 +1,8 @@
 .wrapper {
   width: 100px;
   height: 300px;
+  margin: 20px;
+  margin-top: 53px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;

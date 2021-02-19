@@ -26,6 +26,7 @@
   border-radius: 100%;
   background-image: url("../IMG/background/Plus Icon.jpg");
   background-position: -8px -5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .add_card button:active {
   border: none;
@@ -61,4 +62,20 @@
   font-size: 17px;
   margin: 5px 0 0 0;
   color: red;
+}
+
+@media screen and (max-width: 900px) {
+  .add_card {
+    min-width: 340px;
+    height: 572px;
+    padding: 10px;
+    margin: 20px;
+    background-size: 101%;
+  }
+  .add_card button {
+    width: 150px;
+    height: 150px;
+    background-size: 114%;
+    margin-top: 20px;
+  }
 }
