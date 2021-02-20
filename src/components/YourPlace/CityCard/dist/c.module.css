@@ -89,12 +89,13 @@ p.temperature {
   padding: 25px;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 900px), (max-height: 750px) {
   .add_card {
     width: 340px;
     height: 572px;
     padding: 10px;
-    margin: 20px;
+    margin: 0;
+    margin-top: 20px;
   }
   .add_card p {
     margin: 0;
@@ -125,7 +126,7 @@ p.temperature {
 
   .wrapper .delate {
     top: 40px;
-    right: 40px;
+    right: 20px;
     width: 30px;
     height: 30px;
   }

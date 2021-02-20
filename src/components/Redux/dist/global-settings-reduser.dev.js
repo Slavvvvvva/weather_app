@@ -3,7 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TogleDetailWeatherAC = exports.chaingeActiveCityAC = exports.chaingeDarckModeAC = exports["default"] = void 0;
+exports.chaingeDarckModeAC = exports.setModeAC = exports.TogleDetailWeatherAC = exports.chaingeActiveCityAC = exports["default"] = void 0;
+
+var _store = _interopRequireDefault(require("store"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -25,6 +29,16 @@ var chaingeDarckModeAC = function chaingeDarckModeAC() {
 };
 
 exports.chaingeDarckModeAC = chaingeDarckModeAC;
+var SET_MODE = 'SET_MODE';
+
+var setModeAC = function setModeAC(mode) {
+  return {
+    type: SET_MODE,
+    mode: mode
+  };
+};
+
+exports.setModeAC = setModeAC;
 var SET_ACTIVE_CITY = 'SET_ACTIVE_CITY';
 
 var chaingeActiveCityAC = function chaingeActiveCityAC(city) {
@@ -51,6 +65,8 @@ var GlobalSettingsReduser = function GlobalSettingsReduser() {
 
   switch (action.type) {
     case CHAINGE_DARK_MODE:
+      _store["default"].set('darckMode', !state.darkMode);
+
       return _objectSpread({}, state, {
         darkMode: !state.darkMode
       });
@@ -63,6 +79,11 @@ var GlobalSettingsReduser = function GlobalSettingsReduser() {
     case TOGLE_DETEIL_WEATHER:
       return _objectSpread({}, state, {
         dailyHourly: !state.dailyHourly
+      });
+
+    case SET_MODE:
+      return _objectSpread({}, state, {
+        darkMode: action.mode
       });
 
     default:

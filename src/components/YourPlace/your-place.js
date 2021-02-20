@@ -5,6 +5,7 @@ import y from './y.module.scss'
 import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
 import { getCurrentWeatherIdTC, getCurrentWeatherTC } from '../Redux/weather-reduser'
+import {setModeAC} from '../Redux/global-settings-reduser'
 import CityCard from './CityCard/city-card'
 import store from 'store'
 import { Input } from '../Util/form'
@@ -12,7 +13,7 @@ import { Input } from '../Util/form'
 
 
 const YourPlace = (props) => {
-
+    let mode = store.get('darckMode')
     useEffect(() => {
         let citymass = store.get('city')
         if (citymass && (props.CurrentWeather.length == 0)) {
@@ -20,7 +21,8 @@ const YourPlace = (props) => {
                 props.getCurrentWeatherIdTC(i)
             })
         }
-    }, [])
+        props.setModeAC(mode)
+    }, [mode])
 
 
     let cx = classNames.bind(y);
@@ -75,5 +77,5 @@ let mapStateToProps = (state) => {
     }
 }
 export default compose(
-    connect(mapStateToProps, { getCurrentWeatherIdTC, getCurrentWeatherTC })
+    connect(mapStateToProps, { getCurrentWeatherIdTC, getCurrentWeatherTC, setModeAC })
 )(YourPlace)

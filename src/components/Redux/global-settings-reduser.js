@@ -1,3 +1,5 @@
+import store from 'store'
+
 let initialState = {
     darkMode : false,
     activeCityName: null,
@@ -9,6 +11,15 @@ const chaingeDarckModeAC = () => {
     return (
         {
             type: CHAINGE_DARK_MODE
+        }
+    )
+}
+const SET_MODE = 'SET_MODE'
+const setModeAC = (mode) => {
+    return (
+        {
+            type: SET_MODE,
+            mode: mode
         }
     )
 }
@@ -34,12 +45,14 @@ const TogleDetailWeatherAC = () => {
 
 const GlobalSettingsReduser = (state = initialState, action) => {
     switch (action.type) {
-        case CHAINGE_DARK_MODE: return{...state, darkMode: !state.darkMode}
+        case CHAINGE_DARK_MODE:
+            store.set('darckMode', !state.darkMode )
+            return{...state, darkMode: !state.darkMode}
         case SET_ACTIVE_CITY: return { ...state, activeCityName: action.city}
         case TOGLE_DETEIL_WEATHER: return { ...state, dailyHourly: !state.dailyHourly }
+        case SET_MODE: return {...state, darkMode:action.mode}
         default: return state
     }
 }
 export default GlobalSettingsReduser
-export {chaingeDarckModeAC}
-export {chaingeActiveCityAC, TogleDetailWeatherAC}
+export {chaingeActiveCityAC, TogleDetailWeatherAC, setModeAC, chaingeDarckModeAC }

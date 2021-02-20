@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { compose } from 'redux'
+import store from 'store'
 import d from './d.module.scss'
 import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import { getCNTDaysWeatherTC, getCurrentWeatherIdTC } from '../Redux/weather-reduser'
-import {TogleDetailWeatherAC } from '../Redux/global-settings-reduser'
+import {TogleDetailWeatherAC, setModeAC } from '../Redux/global-settings-reduser'
 import DatailItem from './DatailWeatherItem/detail-weather-item'
 import sun from '../IMG/weatherIcon/SunIcon.svg'
 import littleCloud from '../IMG/weatherIcon/cloudyIcon.svg'
@@ -21,6 +22,7 @@ const DatailWeathear = (props) => {
 
     useEffect(() => {
         props.getCNTDaysWeatherTC(lat, lon)
+        props.setModeAC(store.get('darckMode'))
     }, [lon, lat])
 
     const iconSelector = (patch) => {
@@ -59,6 +61,10 @@ const DatailWeathear = (props) => {
     const classNameB = cx({
         chainge_mode_white: true,
         chainge_mode_darck: props.dispayMode
+    })
+    const classNameBack = cx({
+        back_white: true,
+        back_darck: props.darckMode
     })
 
     if (props.CNTDaysWeather.length == 0) {
@@ -99,7 +105,8 @@ const DatailWeathear = (props) => {
                     <p>Daily</p>
                     <div className={classNameB} onClick={ChaingeMode}></div>
                     <p>Hourly</p>
-                 </div>
+                </div>
+                <NavLink to='/' className={classNameBack}/>
             </div>
             <div className={classNameDet}>
                 {(!props.dispayMode)? ShowDatailItaemDaily : ShowDatailItaemHourly }
@@ -118,6 +125,6 @@ let mapStateToProps = (state) => {
     }
 }
 export default compose(
-    connect(mapStateToProps, {TogleDetailWeatherAC, getCNTDaysWeatherTC, getCurrentWeatherIdTC }),
+    connect(mapStateToProps, {TogleDetailWeatherAC, setModeAC, getCNTDaysWeatherTC, getCurrentWeatherIdTC }),
     withRouter
 )(DatailWeathear)

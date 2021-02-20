@@ -60,12 +60,13 @@
         color: rgb(255, 0, 0);
     }
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 900px),(max-height: 750px)  {
     .add_card{
         min-width: 340px;
         height: 572px;
         padding: 10px;
-        margin: 20px;
+        margin: 0px;
+        margin-top: 20px;
         background-size:101%;
         button{
             width: 150px;
