@@ -3,7 +3,8 @@ import store from 'store'
 let initialState = {
     darkMode : false,
     activeCityName: null,
-    dailyHourly: false
+    dailyHourly: false,
+    appLanguage: 'en',
 }
 
 const CHAINGE_DARK_MODE = 'CHAINGE_DARK_MODE'
@@ -15,11 +16,12 @@ const chaingeDarckModeAC = () => {
     )
 }
 const SET_MODE = 'SET_MODE'
-const setModeAC = (mode) => {
+const setModeAC = (mode,lang) => {
     return (
         {
             type: SET_MODE,
-            mode: mode
+            mode: mode,
+            lang:lang
         }
     )
 }
@@ -42,6 +44,15 @@ const TogleDetailWeatherAC = () => {
         }
     )
 }
+const TOGLE_LANGUAGE = 'TOGLE_LANGUAGE'
+const togleLanguageAC = (lang) => {
+    return (
+        {
+            type: TOGLE_LANGUAGE,
+            lang: lang
+        }
+    )
+}
 
 const GlobalSettingsReduser = (state = initialState, action) => {
     switch (action.type) {
@@ -50,9 +61,12 @@ const GlobalSettingsReduser = (state = initialState, action) => {
             return{...state, darkMode: !state.darkMode}
         case SET_ACTIVE_CITY: return { ...state, activeCityName: action.city}
         case TOGLE_DETEIL_WEATHER: return { ...state, dailyHourly: !state.dailyHourly }
-        case SET_MODE: return {...state, darkMode:action.mode}
+        case SET_MODE: return {...state, darkMode: action.mode, appLanguage:action.lang }
+        case TOGLE_LANGUAGE:
+            store.set('appLanguage', action.lang )
+            return{...state, appLanguage: action.lang, }
         default: return state
     }
 }
 export default GlobalSettingsReduser
-export {chaingeActiveCityAC, TogleDetailWeatherAC, setModeAC, chaingeDarckModeAC }
+export {chaingeActiveCityAC, TogleDetailWeatherAC, setModeAC, chaingeDarckModeAC, togleLanguageAC }

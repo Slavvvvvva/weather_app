@@ -14,16 +14,17 @@ import { Input } from '../Util/form'
 
 const YourPlace = (props) => {
     let mode = store.get('darckMode')
+    let lang = store.get('appLanguage')
     useEffect(() => {
+        props.setModeAC(mode, lang)
         let citymass = store.get('city')
-        if (citymass && (props.CurrentWeather.length == 0)) {
+        if (citymass && (props.CurrentWeather.length == 0)) {    ///!!!!!
             citymass.forEach((i) => {
-                props.getCurrentWeatherIdTC(i)
+                props.getCurrentWeatherIdTC(i,lang)
             })
         }
-        props.setModeAC(mode)
-    }, [mode])
-
+        
+    }, [mode, lang, props.appLanguage]) //bugs: update curds after chainge language
 
     let cx = classNames.bind(y);
     const className = cx({
@@ -32,7 +33,7 @@ const YourPlace = (props) => {
     })
 
     const AddNewCity= (formData) => {
-        props.getCurrentWeatherTC(formData.cityName)
+        props.getCurrentWeatherTC(formData.cityName, props.appLanguage)
     }
 
     const ShowCityCard = props.CurrentWeather.map((item, i) => {
@@ -73,7 +74,8 @@ const AddCityCardReduxForm = reduxForm({ form:'AddCity' })(AddCityCardForm)
 let mapStateToProps = (state) => {
     return {
         darckMode: state.GlobalSettings.darkMode,
-        CurrentWeather: state.Weather.CurrentWeather
+        CurrentWeather: state.Weather.CurrentWeather,
+        appLanguage: state.GlobalSettings.appLanguage
     }
 }
 export default compose(

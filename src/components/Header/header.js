@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import h from './h.module.scss'
 import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
-import {chaingeDarckModeAC} from '../Redux/global-settings-reduser'
+import {chaingeDarckModeAC, togleLanguageAC} from '../Redux/global-settings-reduser'
 import logo from '../IMG/weatherIcon/AppLogo.svg'
 import { NavLink } from 'react-router-dom';
 
@@ -18,9 +18,17 @@ const Header = (props) => {
         logo: true,
         logo_darck: props.darckMode
     })
+    const classNameLang =cx({
+        chainge_mode_white: true,
+        chainge_mode_darck: props.appLanguage ==='ru'
+    })
 
     const ChaingeMode = () =>{
         props.chaingeDarckModeAC()
+    }
+    const ChaingeLang = () =>{
+        if(props.appLanguage === 'en') props.togleLanguageAC('ru')
+        else props.togleLanguageAC('en')
     }
     
     let time = new Date()
@@ -39,6 +47,11 @@ const Header = (props) => {
             <div className ={className} onClick = {ChaingeMode}></div>
             <p>Dark</p>
         </div>
+        <div className = {h.chainge_mode}>
+            <p>ENG</p>
+            <div className ={classNameLang} onClick = {ChaingeLang}></div>
+            <p>RU</p>
+        </div>
         </>
     )
 }
@@ -46,8 +59,9 @@ const Header = (props) => {
 let mapStateToProps = (state) =>{
     return{
         darckMode: state.GlobalSettings.darkMode,
+        appLanguage: state.GlobalSettings.appLanguage
     }
 }
 export default compose(
-    connect(mapStateToProps,{chaingeDarckModeAC})
+    connect(mapStateToProps,{chaingeDarckModeAC,togleLanguageAC})
 ) (Header)

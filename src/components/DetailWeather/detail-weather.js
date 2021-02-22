@@ -18,12 +18,14 @@ import snow from '../IMG/weatherIcon/SnowingIcon.svg'
 const DatailWeathear = (props) => {
 
     let lon = props.match.params.sityId.slice(0, props.match.params.sityId.indexOf('_'))
-    let lat = props.match.params.sityId.slice(props.match.params.sityId.indexOf('_') + 1)
+    let lat = props.match.params.sityId.slice(props.match.params.sityId.indexOf('_') + 1) 
+    let mode = store.get('darckMode')
+    let lang = store.get('appLanguage')
 
     useEffect(() => {
-        props.getCNTDaysWeatherTC(lat, lon)
-        props.setModeAC(store.get('darckMode'))
-    }, [lon, lat])
+        props.setModeAC(mode, lang)
+        props.getCNTDaysWeatherTC(lat, lon, lang) 
+    }, [lon, lat, mode, props.appLanguage])
 
     const iconSelector = (patch) => {
         switch (patch) {
@@ -119,6 +121,7 @@ let mapStateToProps = (state) => {
 
     return {
         darckMode: state.GlobalSettings.darkMode,
+        appLanguage: state.GlobalSettings.appLanguage,
         activCity: state.GlobalSettings.activeCityName,
         dispayMode: state.GlobalSettings.dailyHourly,
         CNTDaysWeather: state.Weather.CNTdaysWeather

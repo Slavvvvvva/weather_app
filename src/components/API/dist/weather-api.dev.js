@@ -18,14 +18,13 @@ var instanse = axios.create({
   baseURL: 'https://api.openweathermap.org/data/2.5/',
   params: {
     appid: 'acf754624f6162ea7af2d33749af05cb',
-    units: 'metric',
-    lang: 'en'
+    units: 'metric'
   }
 });
 
-var getCarrentWeathaear = function getCarrentWeathaear() {
-  var cityName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Konotop';
-  return instanse.get("weather?q=".concat(cityName)).then(function (response) {
+var getCarrentWeathaear = function getCarrentWeathaear(cityName) {
+  var lang = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'en';
+  return instanse.get("weather?q=".concat(cityName, "&lang=").concat(lang)).then(function (response) {
     return response.data;
   });
 };
@@ -33,7 +32,8 @@ var getCarrentWeathaear = function getCarrentWeathaear() {
 exports.getCarrentWeathaear = getCarrentWeathaear;
 
 var getCarrentWeathaearId = function getCarrentWeathaearId(cityID) {
-  return instanse.get("weather?id=".concat(cityID)).then(function (response) {
+  var lang = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'en';
+  return instanse.get("weather?id=".concat(cityID, "&lang=").concat(lang)).then(function (response) {
     return response.data;
   });
 };
@@ -41,7 +41,8 @@ var getCarrentWeathaearId = function getCarrentWeathaearId(cityID) {
 exports.getCarrentWeathaearId = getCarrentWeathaearId;
 
 var getCNTdaysWeathaearId = function getCNTdaysWeathaearId(lat, lon) {
-  return instanse.get("onecall?lat=".concat(lat, "&lon=").concat(lon)).then(function (response) {
+  var lang = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'en';
+  return instanse.get("onecall?lat=".concat(lat, "&lon=").concat(lon, "&lang=").concat(lang)).then(function (response) {
     return response.data;
   });
 };

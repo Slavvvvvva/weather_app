@@ -36,9 +36,9 @@ const delCurrentWeatherAC = (id) => {
     )
 }
 
-export const getCurrentWeatherTC = (cityName) => {
+export const getCurrentWeatherTC = (cityName,lang) => {
     return (dispatch) => {
-        getCarrentWeathaear(cityName)
+        getCarrentWeathaear(cityName,lang)
             .then(responce => {
                 if (responce.cod === 200) {
                     let citymass = store.get('city')
@@ -63,9 +63,9 @@ export const getCurrentWeatherTC = (cityName) => {
     }
 }
 
-export const getCurrentWeatherIdTC = (cityid) => {
+export const getCurrentWeatherIdTC = (cityid, lang) => {
     return (dispatch) => {
-        getCarrentWeathaearId(cityid)
+        getCarrentWeathaearId(cityid,lang)
             .then(responce => {
                 dispatch(setCurrentWeatherAC(responce))
                 let citymass = store.get('city')
@@ -82,9 +82,9 @@ export const getCurrentWeatherIdTC = (cityid) => {
     }
 }
 
-export const getCNTDaysWeatherTC = (lat, lon) => {
+export const getCNTDaysWeatherTC = (lat, lon, lang) => {
     return (dispatch) => {
-        getCNTdaysWeathaearId(lat, lon)
+        getCNTdaysWeathaearId(lat, lon, lang)
             .then(responce => {
                 dispatch(setCNTDaysWeatherAC(responce))
             })

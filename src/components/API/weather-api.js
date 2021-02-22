@@ -6,24 +6,23 @@ const instanse = axios.create({
     params: {
         appid : 'acf754624f6162ea7af2d33749af05cb',
         units : 'metric',
-        lang: 'en'
     }
 })
 
-export const getCarrentWeathaear = (cityName = 'Konotop')  => {
-    return instanse.get (`weather?q=${cityName}`)
+export const getCarrentWeathaear = (cityName, lang='en')  => {
+    return instanse.get (`weather?q=${cityName}&lang=${lang}`)
     .then(response => {
         return response.data
     })
 }
-export const getCarrentWeathaearId = (cityID )  => {
-    return instanse.get (`weather?id=${cityID}`)
+export const getCarrentWeathaearId = (cityID,lang='en' )  => {
+    return instanse.get (`weather?id=${cityID}&lang=${lang}`)
     .then(response => {
         return response.data
     })
 }
-export const getCNTdaysWeathaearId = ( lat, lon )  => {
-    return instanse.get (`onecall?lat=${lat}&lon=${lon}`)
+export const getCNTdaysWeathaearId = ( lat, lon,lang='en' )  => {
+    return instanse.get (`onecall?lat=${lat}&lon=${lon}&lang=${lang}`)
     .then(response => {
         return response.data
     })

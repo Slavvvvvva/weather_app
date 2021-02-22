@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.chaingeDarckModeAC = exports.setModeAC = exports.TogleDetailWeatherAC = exports.chaingeActiveCityAC = exports["default"] = void 0;
+exports.togleLanguageAC = exports.chaingeDarckModeAC = exports.setModeAC = exports.TogleDetailWeatherAC = exports.chaingeActiveCityAC = exports["default"] = void 0;
 
 var _store = _interopRequireDefault(require("store"));
 
@@ -18,7 +18,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var initialState = {
   darkMode: false,
   activeCityName: null,
-  dailyHourly: false
+  dailyHourly: false,
+  appLanguage: 'en'
 };
 var CHAINGE_DARK_MODE = 'CHAINGE_DARK_MODE';
 
@@ -31,10 +32,11 @@ var chaingeDarckModeAC = function chaingeDarckModeAC() {
 exports.chaingeDarckModeAC = chaingeDarckModeAC;
 var SET_MODE = 'SET_MODE';
 
-var setModeAC = function setModeAC(mode) {
+var setModeAC = function setModeAC(mode, lang) {
   return {
     type: SET_MODE,
-    mode: mode
+    mode: mode,
+    lang: lang
   };
 };
 
@@ -58,6 +60,16 @@ var TogleDetailWeatherAC = function TogleDetailWeatherAC() {
 };
 
 exports.TogleDetailWeatherAC = TogleDetailWeatherAC;
+var TOGLE_LANGUAGE = 'TOGLE_LANGUAGE';
+
+var togleLanguageAC = function togleLanguageAC(lang) {
+  return {
+    type: TOGLE_LANGUAGE,
+    lang: lang
+  };
+};
+
+exports.togleLanguageAC = togleLanguageAC;
 
 var GlobalSettingsReduser = function GlobalSettingsReduser() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -83,7 +95,15 @@ var GlobalSettingsReduser = function GlobalSettingsReduser() {
 
     case SET_MODE:
       return _objectSpread({}, state, {
-        darkMode: action.mode
+        darkMode: action.mode,
+        appLanguage: action.lang
+      });
+
+    case TOGLE_LANGUAGE:
+      _store["default"].set('appLanguage', action.lang);
+
+      return _objectSpread({}, state, {
+        appLanguage: action.lang
       });
 
     default:

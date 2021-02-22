@@ -61,9 +61,9 @@ var delCurrentWeatherAC = function delCurrentWeatherAC(id) {
 
 exports.delCurrentWeatherAC = delCurrentWeatherAC;
 
-var getCurrentWeatherTC = function getCurrentWeatherTC(cityName) {
+var getCurrentWeatherTC = function getCurrentWeatherTC(cityName, lang) {
   return function (dispatch) {
-    (0, _weatherApi.getCarrentWeathaear)(cityName).then(function (responce) {
+    (0, _weatherApi.getCarrentWeathaear)(cityName, lang).then(function (responce) {
       if (responce.cod === 200) {
         var citymass = _store["default"].get('city');
 
@@ -99,9 +99,9 @@ var getCurrentWeatherTC = function getCurrentWeatherTC(cityName) {
 
 exports.getCurrentWeatherTC = getCurrentWeatherTC;
 
-var getCurrentWeatherIdTC = function getCurrentWeatherIdTC(cityid) {
+var getCurrentWeatherIdTC = function getCurrentWeatherIdTC(cityid, lang) {
   return function (dispatch) {
-    (0, _weatherApi.getCarrentWeathaearId)(cityid).then(function (responce) {
+    (0, _weatherApi.getCarrentWeathaearId)(cityid, lang).then(function (responce) {
       dispatch(setCurrentWeatherAC(responce));
 
       var citymass = _store["default"].get('city');
@@ -124,9 +124,9 @@ var getCurrentWeatherIdTC = function getCurrentWeatherIdTC(cityid) {
 
 exports.getCurrentWeatherIdTC = getCurrentWeatherIdTC;
 
-var getCNTDaysWeatherTC = function getCNTDaysWeatherTC(lat, lon) {
+var getCNTDaysWeatherTC = function getCNTDaysWeatherTC(lat, lon, lang) {
   return function (dispatch) {
-    (0, _weatherApi.getCNTdaysWeathaearId)(lat, lon).then(function (responce) {
+    (0, _weatherApi.getCNTdaysWeathaearId)(lat, lon, lang).then(function (responce) {
       dispatch(setCNTDaysWeatherAC(responce));
     });
   };
