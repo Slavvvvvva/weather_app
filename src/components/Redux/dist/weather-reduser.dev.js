@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.delCurrentWeatherAC = exports.setCurrentWeatherAC = exports["default"] = exports.getCNTDaysWeatherTC = exports.getCurrentWeatherIdTC = exports.getCurrentWeatherTC = void 0;
+exports.delAllCurrentWeatherAC = exports.delCurrentWeatherAC = exports.setCurrentWeatherAC = exports["default"] = exports.getCNTDaysWeatherTC = exports.getCurrentWeatherIdTC = exports.getCurrentWeatherTC = void 0;
 
 var _weatherApi = require("../API/weather-api");
 
@@ -60,6 +60,15 @@ var delCurrentWeatherAC = function delCurrentWeatherAC(id) {
 };
 
 exports.delCurrentWeatherAC = delCurrentWeatherAC;
+var DELATE_ALL_CURRENT_WEATHER = 'DELATE_ALL_CURRENT_WEATHER';
+
+var delAllCurrentWeatherAC = function delAllCurrentWeatherAC() {
+  return {
+    type: DELATE_ALL_CURRENT_WEATHER
+  };
+};
+
+exports.delAllCurrentWeatherAC = delAllCurrentWeatherAC;
 
 var getCurrentWeatherTC = function getCurrentWeatherTC(cityName, lang) {
   return function (dispatch) {
@@ -81,7 +90,7 @@ var getCurrentWeatherTC = function getCurrentWeatherTC(cityName, lang) {
             dispatch((0, _reduxForm.reset)('AddCity'));
           } else {
             dispatch((0, _reduxForm.stopSubmit)('AddCity', {
-              'cityName': 'you already add this city'
+              'cityName': "".concat(lang === "ru" ? 'вы уже добавили этот город' : 'you already add this city')
             }));
           }
         };
@@ -91,7 +100,7 @@ var getCurrentWeatherTC = function getCurrentWeatherTC(cityName, lang) {
     })["catch"](function (responce) {
       console.log(responce);
       dispatch((0, _reduxForm.stopSubmit)('AddCity', {
-        'cityName': 'city not found'
+        'cityName': "".concat(lang === "ru" ? 'город не найден' : 'city not found')
       }));
     });
   };
@@ -164,6 +173,11 @@ var WeatherReduser = function WeatherReduser() {
         CurrentWeather: state.CurrentWeather.filter(function (item) {
           return item.id !== action.id;
         })
+      });
+
+    case DELATE_ALL_CURRENT_WEATHER:
+      return _objectSpread({}, state, {
+        CurrentWeather: []
       });
 
     default:

@@ -69,7 +69,7 @@ const DatailWeathear = (props) => {
         back_darck: props.darckMode
     })
 
-    if (props.CNTDaysWeather.length == 0) {
+    if (props.CNTDaysWeather.length ===0) {
         return (
             <p>Loading</p>
         )
@@ -77,12 +77,25 @@ const DatailWeathear = (props) => {
 
     const ShowDatailItaemDaily = props.CNTDaysWeather.daily.map((item, i) => {
         return (
-            <DatailItem day={new Date(item.dt*1000).toDateString().slice( 0 ,3)} icon={iconSelector(item.weather[0].icon)} daytemp={item.temp.day} descriptions={item.weather[0].description} key={`${i}gjk`} />
+            <DatailItem 
+             day ={`${(props.appLanguage ==='ru')?
+             new Date(item.dt*1000).toLocaleString('ru', {weekday: 'short'})
+             : new Date(item.dt*1000).toDateString().slice( 0 ,3)}`}
+             icon={iconSelector(item.weather[0].icon)}
+             daytemp={item.temp.day}
+             descriptions={item.weather[0].description} key={`${i}gjk`} />
         )
     })
     const ShowDatailItaemHourly = props.CNTDaysWeather.hourly.map((item, i) => {
         return (
-            <DatailItem day={`${new Date(item.dt*1000).getHours()}:00`} icon={iconSelector(item.weather[0].icon)} daytemp={item.temp} descriptions={item.weather[0].description} hourly ={props.dispayMode} key={`${i}gjk`} />
+            <DatailItem 
+            day ={`${(props.appLanguage ==='ru')?
+             new Date(item.dt*1000).toLocaleString('ru', {weekday: 'short', hour: 'numeric', minute: 'numeric'})
+             : new Date(item.dt*1000).toLocaleString('en', {weekday: 'short', hour: 'numeric',hour12: false, minute: 'numeric'})}`}
+            icon={iconSelector(item.weather[0].icon)}
+            daytemp={item.temp}
+            descriptions={item.weather[0].description}
+            hourly ={props.dispayMode} key={`${i}gjk`} />
         )
     })
 
@@ -104,9 +117,9 @@ const DatailWeathear = (props) => {
                     <p>{props.activCity}</p>
                 </div>
                 <div className={d.chainge_mode}>
-                    <p>Daily</p>
+                    <p>{`${(props.appLanguage === 'ru')? 'По дням':'Daily' }`}</p>
                     <div className={classNameB} onClick={ChaingeMode}></div>
-                    <p>Hourly</p>
+                    <p>{`${(props.appLanguage === 'ru')? 'По часам':'Hourly' }`}</p>
                 </div>
                 <NavLink to='/' className={classNameBack}/>
             </div>

@@ -33,9 +33,6 @@ const App = (props) => {
         </div>
         <div className={classNameC}>
           <Switch>
-            {/* {<Route path='/myprofile/:userId?' render={() => <UserContainer />} />
-            <Route path='/meseges' render={() => <ChatContainer />} />
-            <Route path='/login' render={() => <Login />} /> */}
             <Route path='/detail/:sityId' render={() => <DetailWeather/>} />
             <Route exact path='/' render={() => <YourPlace/>}/>
             <Route path='/*' render={() => <h1> 404 page not found </h1>} />

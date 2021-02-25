@@ -4,6 +4,7 @@ import h from './h.module.scss'
 import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
 import {chaingeDarckModeAC, togleLanguageAC} from '../Redux/global-settings-reduser'
+import {delAllCurrentWeatherAC} from '../Redux/weather-reduser'
 import logo from '../IMG/weatherIcon/AppLogo.svg'
 import { NavLink } from 'react-router-dom';
 
@@ -27,6 +28,7 @@ const Header = (props) => {
         props.chaingeDarckModeAC()
     }
     const ChaingeLang = () =>{
+        props.delAllCurrentWeatherAC()
         if(props.appLanguage === 'en') props.togleLanguageAC('ru')
         else props.togleLanguageAC('en')
     }
@@ -40,18 +42,26 @@ const Header = (props) => {
             <p>MiniWeathear</p>
         </NavLink>
         <div>
-            <p className = {h.time}>{time.toUTCString().slice(0,16)}</p>
+            {(props.appLanguage === 'ru')?
+            <p className = {h.time}>{time.toLocaleString('ru', {weekday: 'long',year: 'numeric',month: 'short',day: 'numeric'})}</p>
+            : <p className = {h.time}>{time.toUTCString().slice(0,16)}</p>
+            }
+            
+            
         </div>
-        <div className = {h.chainge_mode}>
-            <p>Light</p>
-            <div className ={className} onClick = {ChaingeMode}></div>
-            <p>Dark</p>
+        <div>
+            <div className = {h.chainge_mode}>
+                <p>{`${(props.appLanguage === 'ru')? 'светлая':'Light' }`}</p>
+                <div className ={className} onClick = {ChaingeMode}></div>
+                <p>{`${(props.appLanguage === 'ru')? 'темная':'darck' }`}</p>
+            </div>
+            <div className = {h.chainge_mode}>
+                <p>{`${(props.appLanguage === 'ru')? 'англ':'ENG' }`}</p>
+                <div className ={classNameLang} onClick = {ChaingeLang}></div>
+                <p>{`${(props.appLanguage === 'ru')? 'ру':'RU' }`}</p>
+            </div>
         </div>
-        <div className = {h.chainge_mode}>
-            <p>ENG</p>
-            <div className ={classNameLang} onClick = {ChaingeLang}></div>
-            <p>RU</p>
-        </div>
+        
         </>
     )
 }
@@ -63,5 +73,5 @@ let mapStateToProps = (state) =>{
     }
 }
 export default compose(
-    connect(mapStateToProps,{chaingeDarckModeAC,togleLanguageAC})
+    connect(mapStateToProps,{chaingeDarckModeAC,togleLanguageAC, delAllCurrentWeatherAC})
 ) (Header)

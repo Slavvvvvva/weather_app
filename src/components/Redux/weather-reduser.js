@@ -36,6 +36,15 @@ const delCurrentWeatherAC = (id) => {
     )
 }
 
+const DELATE_ALL_CURRENT_WEATHER = 'DELATE_ALL_CURRENT_WEATHER'
+const delAllCurrentWeatherAC = () => {
+    return (
+        {
+            type: DELATE_ALL_CURRENT_WEATHER,
+        }
+    )
+}
+
 export const getCurrentWeatherTC = (cityName,lang) => {
     return (dispatch) => {
         getCarrentWeathaear(cityName,lang)
@@ -50,7 +59,7 @@ export const getCurrentWeatherTC = (cityName,lang) => {
                             dispatch(reset('AddCity'))
                         }
                         else{
-                            dispatch(stopSubmit('AddCity', { 'cityName': 'you already add this city' }))
+                            dispatch(stopSubmit('AddCity', { 'cityName': `${(lang ==="ru")?'вы уже добавили этот город':'you already add this city'}`}))
                         }
                     }
                     chackDoubleCard(citymass)
@@ -58,7 +67,7 @@ export const getCurrentWeatherTC = (cityName,lang) => {
             })
             .catch( responce => {
                 console.log(responce)
-                dispatch(stopSubmit('AddCity', { 'cityName': 'city not found' }))
+                dispatch(stopSubmit('AddCity', { 'cityName': `${(lang ==="ru")?'город не найден':'city not found'}`}))
             }) 
     }
 }
@@ -107,9 +116,9 @@ const WeatherReduser = (state = initialState, action) => {
             return {...state, 
             CurrentWeather: state.CurrentWeather.filter(item => item.id !== action.id )       
         }
-
+        case DELATE_ALL_CURRENT_WEATHER : return {...state, CurrentWeather:[]}
         default: return state
     }
 }
 export default WeatherReduser
-export { setCurrentWeatherAC, delCurrentWeatherAC }
+export { setCurrentWeatherAC, delCurrentWeatherAC, delAllCurrentWeatherAC }

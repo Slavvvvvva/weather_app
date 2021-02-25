@@ -18,13 +18,12 @@ const YourPlace = (props) => {
     useEffect(() => {
         props.setModeAC(mode, lang)
         let citymass = store.get('city')
-        if (citymass && (props.CurrentWeather.length == 0)) {    ///!!!!!
+        if (citymass && (props.CurrentWeather.length == 0)) {  
             citymass.forEach((i) => {
                 props.getCurrentWeatherIdTC(i,lang)
             })
         }
-        
-    }, [mode, lang, props.appLanguage]) //bugs: update curds after chainge language
+    }, [mode, lang])
 
     let cx = classNames.bind(y);
     const className = cx({
@@ -41,7 +40,7 @@ const YourPlace = (props) => {
             <CityCard city={item.massege} CurrentWeather={props.CurrentWeather[i]} key={`${i}gjkfjgk`} />
         )
     })
-
+    
     return (
         <>
             {props.CurrentWeather && ShowCityCard}
@@ -53,8 +52,13 @@ const YourPlace = (props) => {
     )
 }
 
-
-let notAmpty = (value) => {
+let notAmptyRU = (value) => {
+    if (value) return undefined
+    return (
+        <p className = {y.valdation}>ты не можешь отправить пустое поле</p>
+    )
+}
+let notAmptyENG = (value) => {
     if (value) return undefined
     return (
         <p className = {y.valdation}>you can't send an empty field</p>
@@ -64,7 +68,7 @@ let notAmpty = (value) => {
 const AddCityCardForm = (props) => {
     return (
         <form className={y.form} onSubmit={props.handleSubmit} >
-            <Field placeholder={'ADD CITY'} name={'cityName'} component={Input} className={y.input} validate = {[notAmpty]}></Field>
+            <Field placeholder={`${(props.appLanguage ==='ru')? 'ГОРОД':'ADD CITY'}`} name={'cityName'} component={Input} className={y.input} validate = {(props.appLanguage ==='ru')?[notAmptyRU]:[notAmptyENG]}></Field>
             <button></button>
         </form>
     )
