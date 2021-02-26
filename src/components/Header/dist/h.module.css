@@ -10,8 +10,9 @@
 }
 
 .chainge_mode {
+  width: 260px;
   display: flex;
-  margin-right: 30px;
+  justify-content: center;
 }
 .chainge_mode p {
   font-weight: normal;
@@ -37,6 +38,41 @@
 
 .logo_darck p {
   color: white;
+}
+
+.setting_button {
+  width: 50px;
+  height: 50px;
+  margin-right: 40px;
+  border: none;
+  background: none;
+  background-image: url("../IMG/background/setting.svg");
+  background-repeat: no-repeat;
+  background-position: center, center;
+  opacity: 0.6;
+}
+.setting_button:hover {
+  opacity: 1;
+}
+.setting_button:focus {
+  outline: none;
+}
+
+.setting_button_black {
+  background-image: url("../IMG/background/setting_black.svg");
+}
+
+.settings {
+  /* right: 1px;
+  top:70px; */
+  display: flex;
+  align-items: center;
+  margin-right: -540px;
+  transition: margin-right 1s;
+}
+
+.settings_activ {
+  margin-right: 0px;
 }
 
 @media screen and (max-width: 900px) {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { compose } from 'redux';
 import h from './h.module.scss'
 import classNames from 'classnames/bind';
@@ -9,6 +9,8 @@ import logo from '../IMG/weatherIcon/AppLogo.svg'
 import { NavLink } from 'react-router-dom';
 
 const Header = (props) => {
+
+    const [settingsActiv, setSettingsActiv] = useState(false)
 
     let cx = classNames.bind(h);
     const className =cx({
@@ -23,6 +25,14 @@ const Header = (props) => {
         chainge_mode_white: true,
         chainge_mode_darck: props.appLanguage ==='ru'
     })
+    const classNameSetting =cx({
+        settings: true,
+        settings_activ: settingsActiv
+    })
+    const classNameSettingBtn =cx({
+        setting_button: true,
+        setting_button_black: props.darckMode
+    })
 
     const ChaingeMode = () =>{
         props.chaingeDarckModeAC()
@@ -35,6 +45,7 @@ const Header = (props) => {
     
     let time = new Date()
     
+    
     return(
         <>
         <NavLink to = {`/`} className = {classNameL}>
@@ -45,11 +56,11 @@ const Header = (props) => {
             {(props.appLanguage === 'ru')?
             <p className = {h.time}>{time.toLocaleString('ru', {weekday: 'long',year: 'numeric',month: 'short',day: 'numeric'})}</p>
             : <p className = {h.time}>{time.toUTCString().slice(0,16)}</p>
-            }
-            
-            
+            }   
         </div>
-        <div>
+        
+        <div className = {classNameSetting}>
+            <button className ={classNameSettingBtn} onClick = {() => setSettingsActiv(!settingsActiv)} ></button>
             <div className = {h.chainge_mode}>
                 <p>{`${(props.appLanguage === 'ru')? 'светлая':'Light' }`}</p>
                 <div className ={className} onClick = {ChaingeMode}></div>

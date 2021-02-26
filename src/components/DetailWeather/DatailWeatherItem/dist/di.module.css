@@ -21,6 +21,7 @@
 }
 .wrapper .temp {
   font-size: 35px;
+  margin-right: -7px;
 }
 .wrapper .day {
   font-size: 30px;
@@ -28,6 +29,10 @@
 }
 .wrapper .des {
   height: 36px;
+}
+.wrapper .des p {
+  font-size: 13px;
+  text-align: center;
 }
 
 .wrapper_hourly {
