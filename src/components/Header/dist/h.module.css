@@ -49,7 +49,7 @@
   background-image: url("../IMG/background/setting.svg");
   background-repeat: no-repeat;
   background-position: center, center;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 .setting_button:hover {
   opacity: 1;
@@ -63,8 +63,9 @@
 }
 
 .settings {
-  /* right: 1px;
-  top:70px; */
+  background-color: #ffffff;
+  position: absolute;
+  right: 1px;
   display: flex;
   align-items: center;
   margin-right: -540px;
@@ -75,6 +76,16 @@
   margin-right: 0px;
 }
 
+.setting_darck {
+  background-color: #2b244d;
+}
+
+.under {
+  margin-right: 20px;
+  width: 50px;
+  height: 50px;
+}
+
 @media screen and (max-width: 900px) {
   .logo {
     margin: 20px;
@@ -83,14 +94,31 @@
     display: none;
   }
 
-  .chainge_mode {
-    margin: 20px;
-  }
-  .chainge_mode p {
-    display: none;
+  .time {
+    font-size: 17px;
   }
 
-  .time {
-    font-size: 20px;
+  .settings {
+    margin-right: -340px;
+  }
+  .settings .setting_button {
+    margin-right: 0;
+  }
+  .settings .chainge_mode {
+    margin: 0;
+    width: 170px;
+  }
+  .settings .chainge_mode p {
+    margin: 4px;
+    font-size: 12px;
+  }
+  .settings .chainge_mode .chainge_mode_white {
+    width: 40px;
+    height: 20px;
+    background-size: 100%;
+  }
+
+  .settings_activ {
+    margin-right: -30px;
   }
 }

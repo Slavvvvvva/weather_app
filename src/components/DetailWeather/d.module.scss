@@ -17,6 +17,10 @@
     div{
         display:flex;
         flex-direction: row;
+        img{
+            width: 400px;
+            height: 400px;
+        }
         div{
             display: flex;
             flex-direction: column;
@@ -134,10 +138,10 @@
         div{
             flex-direction: column;
             align-items: center;
-            margin-top: 20px;
+            
             img{
-                width: 200px;
-                height: 200px;
+                width: 220px;
+                height: 220px;
             }
             div{
                 margin-left: 0;

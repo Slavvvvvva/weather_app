@@ -20,6 +20,10 @@
   display: flex;
   flex-direction: row;
 }
+.current div img {
+  width: 400px;
+  height: 400px;
+}
 .current div div {
   display: flex;
   flex-direction: column;
@@ -133,11 +137,10 @@
   .current div {
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
   }
   .current div img {
-    width: 200px;
-    height: 200px;
+    width: 220px;
+    height: 220px;
   }
   .current div div {
     margin-left: 0;

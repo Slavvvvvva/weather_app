@@ -27,7 +27,8 @@ const Header = (props) => {
     })
     const classNameSetting =cx({
         settings: true,
-        settings_activ: settingsActiv
+        settings_activ: settingsActiv,
+        setting_darck: props.darckMode
     })
     const classNameSettingBtn =cx({
         setting_button: true,
@@ -54,9 +55,12 @@ const Header = (props) => {
         </NavLink>
         <div>
             {(props.appLanguage === 'ru')?
-            <p className = {h.time}>{time.toLocaleString('ru', {weekday: 'long',year: 'numeric',month: 'short',day: 'numeric'})}</p>
+            <p className = {h.time}>{time.toLocaleString('ru', {weekday: 'short',year: 'numeric',month: 'short',day: 'numeric'})}</p>
             : <p className = {h.time}>{time.toUTCString().slice(0,16)}</p>
             }   
+        </div>
+        <div className={h.under}>
+
         </div>
         
         <div className = {classNameSetting}>

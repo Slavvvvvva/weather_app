@@ -46,7 +46,7 @@
     background-image:url('../IMG/background/setting.svg');
     background-repeat:no-repeat;
     background-position: center, center;
-    opacity: 0.6;
+    opacity: 0.8;
     &:hover{
         opacity: 1;
     }
@@ -58,16 +58,24 @@
     background-image:url('../IMG/background/setting_black.svg')
 }
 .settings{
-    //position: absolute;
-    /* right: 1px;
-    top:70px; */
+    background-color: #ffffff;
+    position: absolute;
+    right: 1px;
     display: flex;
     align-items:center;
     margin-right: -540px;
-    transition: margin-right 1s;  
+    transition: margin-right 1s; 
 }
 .settings_activ{
     margin-right: 0px;
+}
+.setting_darck{
+    background-color: #2b244d;
+}
+.under{
+    margin-right: 20px;
+    width: 50px;
+    height:50px;
 }
 
 @media screen and (max-width: 900px) {
@@ -77,13 +85,30 @@
             display: none;
         }
     }
-    .chainge_mode{
-        margin: 20px;
-        p{
-            display: none;
+    .time{
+        font-size: 17px;
+    }
+    .settings{
+        margin-right: -340px;
+        .setting_button{
+            margin-right: 0;
+            
+        }
+        .chainge_mode{
+            margin: 0;
+            width: 170px;
+            p{
+                margin:4px;
+                font-size: 12px;
+            }
+            .chainge_mode_white{
+                width:40px;
+                height: 20px;
+                background-size: 100%;
+            }
         }
     }
-    .time{
-        font-size: 20px;
+    .settings_activ{
+        margin-right: -30px;
     }
-  }
+}

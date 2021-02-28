@@ -8,12 +8,25 @@ import { NavLink, withRouter } from 'react-router-dom'
 import { getCNTDaysWeatherTC, getCurrentWeatherIdTC } from '../Redux/weather-reduser'
 import {TogleDetailWeatherAC, setModeAC } from '../Redux/global-settings-reduser'
 import DatailItem from './DatailWeatherItem/detail-weather-item'
-import sun from '../IMG/weatherIcon/SunIcon.svg'
-import littleCloud from '../IMG/weatherIcon/cloudyIcon.svg'
-import cloud from '../IMG/weatherIcon/BigCloud.svg'
-import rain from '../IMG/weatherIcon/RainIcon.svg'
-import storm from '../IMG/weatherIcon/Stromicon.svg'
-import snow from '../IMG/weatherIcon/SnowingIcon.svg'
+import d01 from '../IMG/openweathermap/01d.svg'
+import n01 from '../IMG/openweathermap/01n.svg'
+import d02 from '../IMG/openweathermap/02d.svg'
+import n02 from '../IMG/openweathermap/02n.svg'
+import d03 from '../IMG/openweathermap/03d.svg'
+import n03 from '../IMG/openweathermap/03n.svg'
+import d04 from '../IMG/openweathermap/04d.svg'
+import n04 from '../IMG/openweathermap/04n.svg'
+import d09 from '../IMG/openweathermap/09d.svg'
+import n09 from '../IMG/openweathermap/09n.svg'
+import d10 from '../IMG/openweathermap/10d.svg'
+import n10 from '../IMG/openweathermap/10n.svg'
+import d11 from '../IMG/openweathermap/11d.svg'
+import n11 from '../IMG/openweathermap/11n.svg'
+import d13 from '../IMG/openweathermap/13d.svg'
+import n13 from '../IMG/openweathermap/13n.svg'
+import d50 from '../IMG/openweathermap/50d.svg'
+import n50 from '../IMG/openweathermap/50n.svg'
+
 
 const DatailWeathear = (props) => {
 
@@ -29,27 +42,28 @@ const DatailWeathear = (props) => {
 
     const iconSelector = (patch) => {
         switch (patch) {
-            case '01d': return sun
-            case '01n': return sun
-            case '02d': return littleCloud
-            case '02n': return littleCloud
-            case '03d': return cloud
-            case '03n': return cloud
-            case '04d': return cloud
-            case '04n': return cloud
-            case '09d': return rain
-            case '09n': return rain
-            case '10d': return rain
-            case '10n': return rain
-            case '11d': return storm
-            case '11n': return storm
-            case '13d': return snow
-            case '13n': return snow
-            case '50d': return littleCloud
-            case '50n': return littleCloud
-            default: return sun
+            case '01d': return d01
+            case '01n': return n01
+            case '02d': return d02
+            case '02n': return n02
+            case '03d': return d03
+            case '03n': return n03
+            case '04d': return d04
+            case '04n': return n04
+            case '09d': return d09
+            case '09n': return n09
+            case '10d': return d10
+            case '10n': return n10
+            case '11d': return d11
+            case '11n': return n11
+            case '13d': return d13
+            case '13n': return n13
+            case '50d': return d50
+            case '50n': return n50
+            default: return d01
         }
     }
+    
 
     let cx = classNames.bind(d);
     const className = cx({

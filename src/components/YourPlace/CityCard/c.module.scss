@@ -47,6 +47,17 @@
         margin-top: 30px;
         font-size: 30px; 
     }
+    .weather_icon{
+        height: 260px;
+        width: 290px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        img{
+            height: 260px;
+            width: 260px;
+        }
+    }
     
 }
 .add_card_dark{
@@ -57,12 +68,13 @@
 p.temperature{
     font-size: 120px;
     margin:0;
-    margin-top:20px;
+    //margin-top:20px;
     margin-right: -18px;
     
 }
 .des{
     font-size: 30px;
+    text-align: center;
 }
 .minmax{
     display: flex;
@@ -101,14 +113,14 @@ p.temperature{
             font-size: 25px; 
         }
         .weather_icon{
-            height: 180px;
-            width: 180px;
+            height: 220px;
+            width: 220px;
             display: flex;
             flex-direction: column;
             align-items: center;
             img{
-                height: 180px;
-                width: 180px;
+                height: 220px;
+                width: 220px;
             }
         }
     }
