@@ -6,7 +6,8 @@ const DatailItem  = (props) => {
     let cx = classNames.bind(di);
     const className = cx({
         wrapper: true,
-        wrapper_hourly: props.hourly,
+        wrapper_hourly: props.hourlyItem,
+
     })
 
     return (

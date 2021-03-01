@@ -109,7 +109,8 @@ const DatailWeathear = (props) => {
             icon={iconSelector(item.weather[0].icon)}
             daytemp={item.temp}
             descriptions={item.weather[0].description}
-            hourly ={props.dispayMode} key={`${i}gjk`} />
+            hourly ={props.dispayMode} key={`${i}gjk`}
+            hourlyItem ={true} />
         )
     })
 
@@ -130,16 +131,21 @@ const DatailWeathear = (props) => {
                 <div className={d.city_name}>
                     <p>{props.activCity}</p>
                 </div>
-                <div className={d.chainge_mode}>
+                {/* <div className={d.chainge_mode}>
                     <p>{`${(props.appLanguage === 'ru')? 'По дням':'Daily' }`}</p>
                     <div className={classNameB} onClick={ChaingeMode}></div>
                     <p>{`${(props.appLanguage === 'ru')? 'По часам':'Hourly' }`}</p>
-                </div>
+                </div> */}
                 <NavLink to='/' className={classNameBack}/>
             </div>
-            <div className={classNameDet}>
-                {(!props.dispayMode)? ShowDatailItaemDaily : ShowDatailItaemHourly }
-            </div>
+            {<div className={classNameDet}>
+                <div className ={d.item_wrapper}>
+                    {ShowDatailItaemDaily}
+                </div>
+                <div className ={d.item_wrapper}>
+                    {ShowDatailItaemHourly}
+                </div>
+            </div>}
         </div>
     )
 }
