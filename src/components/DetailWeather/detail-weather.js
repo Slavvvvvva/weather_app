@@ -26,6 +26,8 @@ import d13 from '../IMG/openweathermap/13d.svg'
 import n13 from '../IMG/openweathermap/13n.svg'
 import d50 from '../IMG/openweathermap/50d.svg'
 import n50 from '../IMG/openweathermap/50n.svg'
+import sunrice from '../IMG/openweathermap/sunrise.svg'
+import sunset from '../IMG/openweathermap/sunset.svg'
 
 
 const DatailWeathear = (props) => {
@@ -97,6 +99,7 @@ const DatailWeathear = (props) => {
              : new Date(item.dt*1000).toDateString().slice( 0 ,3)}`}
              icon={iconSelector(item.weather[0].icon)}
              daytemp={item.temp.day}
+             pop= {item.pop}
              descriptions={item.weather[0].description} key={`${i}gjk`} />
         )
     })
@@ -109,6 +112,7 @@ const DatailWeathear = (props) => {
             icon={iconSelector(item.weather[0].icon)}
             daytemp={item.temp}
             descriptions={item.weather[0].description}
+            pop= {item.pop}
             hourly ={props.dispayMode} key={`${i}gjk`}
             hourlyItem ={true} />
         )
@@ -125,11 +129,18 @@ const DatailWeathear = (props) => {
                     <img src={iconSelector(props.CNTDaysWeather.current.weather[0].icon)} alt='weather logo' />
                     <div>
                         <p className={d.temp}> {Math.round(props.CNTDaysWeather.current.temp)}&#176; </p>
+                        <p className = {d.fills}>feels like {Math.round(props.CNTDaysWeather.current.feels_like)}&#176;</p>
                         <p className={d.des}> {props.CNTDaysWeather.current.weather[0].description} </p>
                     </div>
                 </div>
                 <div className={d.city_name}>
                     <p>{props.activCity}</p>
+                    <div className ={d.sunrice}>
+                    <img src={sunrice} alt="sunrice"/>
+                    <p>{new Date(props.CNTDaysWeather.current.sunrise*1000).toLocaleString('ru', {hour: 'numeric', minute: 'numeric'})} </p>
+                    <img src={sunset} alt="sunset"/>
+                    <p>{new Date(props.CNTDaysWeather.current.sunset*1000).toLocaleString('ru', {hour: 'numeric', minute: 'numeric'})} </p>
+                </div>
                 </div>
                 {/* <div className={d.chainge_mode}>
                     <p>{`${(props.appLanguage === 'ru')? 'По дням':'Daily' }`}</p>

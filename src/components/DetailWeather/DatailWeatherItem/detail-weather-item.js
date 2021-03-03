@@ -16,6 +16,7 @@ const DatailItem  = (props) => {
             <div>
                 <img src = {props.icon} alt = 'weathaer icon' />
             </div>
+                <p>{props.pop*100}%</p>
                 <p className = {di.temp}>{Math.round(props.daytemp)}&#176; </p>
             <div className = {di.des}>
                 <p>{props.descriptions}</p>
