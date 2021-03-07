@@ -57,8 +57,16 @@ const LocationCard = (props) => {
         add_card: true,
         add_card_dark: props.darckMode
     })
+    const classNameB = cx({
+        delate: true,
+        delate_darck: props.darckMode
+    })
    
     let sityCoord = `${props.PositionWeather.lon}_${props.PositionWeather.lat}`
+
+    /* const DaliteCard = () => {
+        props.delCurrentWeatherAC(props.CurrentWeather.id)
+    } */
 
     if (!props.PositionWeather) {
         return (
@@ -71,7 +79,7 @@ const LocationCard = (props) => {
     return (
         <div className={c.wrapper}>
         <NavLink to = {`/detail/${sityCoord}`} className={className} onClick = {()=> props.chaingeActiveCityAC(props.PositionWeather.name)}>
-            <p>{props.city}</p>
+            <p>{`${(props.appLanguage === 'ru')? 'текущaя локация':'current location' }`}</p>
             <div className={c.weather_icon}>
                 <img src={iconSelector(props.PositionWeather.current.weather[0].icon)} alt='weather icon' />
             </div>
@@ -80,7 +88,8 @@ const LocationCard = (props) => {
                 {Math.round(props.PositionWeather.current.temp)}&#176;
             </p>
             <div className={c.des}> {props.PositionWeather.current.weather[0].description}</div>
-            <p>{props.day}</p>      
+            <p className = {c.update}> {`${(props.appLanguage === 'ru')? 'последнее обновление':'Last update' }`} <br/>{props.day}</p>
+            <button className= {classNameB} /* onClick={DaliteCard} */ key={`jfkcncxfd`}></button>      
         </NavLink>
         </div>
     )
@@ -89,6 +98,7 @@ const LocationCard = (props) => {
 let mapStateToProps = (state) => {
     return {
         darckMode: state.GlobalSettings.darkMode,
+        appLanguage: state.GlobalSettings.appLanguage, 
     }
 }
 export default compose(

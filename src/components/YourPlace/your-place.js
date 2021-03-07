@@ -56,18 +56,18 @@ const YourPlace = (props) => {
     return (
         <>
             {props.CurrentWeather && ShowCityCard}
-            {props.positionWeather && <LocationCard city='your Location'
+            {props.positionWeather && <LocationCard 
                                         PositionWeather={props.positionWeather}
                                         day = {`${(props.appLanguage ==='ru')?
-                                        new Date(props.position.timestamp*1000).toLocaleString('ru', {weekday: 'short', hour: 'numeric', minute: 'numeric'})
-                                        : new Date(props.position.timestamp*1000).toLocaleString('en', {weekday: 'short', hour: 'numeric',hour12: false, minute: 'numeric'})}`}/>
+                                        new Date(props.position.timestamp).toLocaleString('ru', {weekday: 'short', hour: 'numeric', minute: 'numeric'})
+                                        : new Date(props.position.timestamp).toLocaleString('en', {weekday: 'short', hour: 'numeric',hour12: false, minute: 'numeric'})}`}/>
             }
             <div className={className}>
-                <p>your location <br/> weather</p>
-                <button onClick ={find} />    
-            </div>
-            <div className={className}>
                 <AddCityCardReduxForm onSubmit={AddNewCity} {...props}/>
+                <div className = {y.location}>
+                    <button className = {y.location_button}  onClick ={find} />  
+                    {(props.appLanguage === 'ru')? <p>добавить/обновить <br/> погоду по локации </p>:<p>add/update your  <br/> location weather </p>}
+                </div>
             </div>
         </>
 
