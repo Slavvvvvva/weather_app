@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.delAllCurrentWeatherAC = exports.delCurrentWeatherAC = exports.setCurrentWeatherAC = exports["default"] = exports.getCNTDaysWeatherTC = exports.getCurrentWeatherIdTC = exports.getCurrentWeatherTC = void 0;
+exports.setYourPositionAC = exports.delAllCurrentWeatherAC = exports.delCurrentWeatherAC = exports.setCurrentWeatherAC = exports["default"] = exports.getPositionWeatherTC = exports.getPositionTC = exports.getCNTDaysWeatherTC = exports.getCurrentWeatherIdTC = exports.getCurrentWeatherTC = void 0;
 
 var _weatherApi = require("../API/weather-api");
 
@@ -29,7 +29,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var initialState = {
   CurrentWeather: [],
-  CNTdaysWeather: []
+  CNTdaysWeather: [],
+  yourPosition: {},
+  yourPositionWeather: null
 };
 var SET_CURRENT_WEATHER = 'SET_CURRENT_WEATHER';
 
@@ -69,6 +71,26 @@ var delAllCurrentWeatherAC = function delAllCurrentWeatherAC() {
 };
 
 exports.delAllCurrentWeatherAC = delAllCurrentWeatherAC;
+var SET_YOUR_POSITION = 'SET_YOUR_POSITION';
+
+var setYourPositionAC = function setYourPositionAC(lat, _long, timestamp) {
+  return {
+    type: SET_YOUR_POSITION,
+    lat: lat,
+    "long": _long,
+    timestamp: timestamp
+  };
+};
+
+exports.setYourPositionAC = setYourPositionAC;
+var SET_YOUR_POSITION_WEATHER = 'SET_YOUR_POSITION_WEATHER';
+
+var setYourPositionWeatherAC = function setYourPositionWeatherAC(weatherData) {
+  return {
+    type: SET_YOUR_POSITION_WEATHER,
+    weatherData: weatherData
+  };
+};
 
 var getCurrentWeatherTC = function getCurrentWeatherTC(cityName, lang) {
   return function (dispatch) {
@@ -143,6 +165,37 @@ var getCNTDaysWeatherTC = function getCNTDaysWeatherTC(lat, lon, lang) {
 
 exports.getCNTDaysWeatherTC = getCNTDaysWeatherTC;
 
+var getPositionTC = function getPositionTC() {
+  return function (dispatch) {
+    if (!navigator.geolocation) {
+      console.log('Geolocation не поддерживается вашим браузером');
+    } else {
+      navigator.geolocation.watchPosition(function (position) {
+        dispatch(setYourPositionAC(position.coords.latitude, position.coords.longitude, position.timestamp));
+        console.log(position);
+      }, function () {
+        return console.log('не получилось получить координаті');
+      }, {
+        enableHighAccuracy: true,
+        maximumAge: 30000,
+        timeout: 27000
+      });
+    }
+  };
+};
+
+exports.getPositionTC = getPositionTC;
+
+var getPositionWeatherTC = function getPositionWeatherTC(lat, lon, lang) {
+  return function (dispatch) {
+    (0, _weatherApi.getCNTdaysWeathaearId)(lat, lon, lang).then(function (responce) {
+      dispatch(setYourPositionWeatherAC(responce));
+    });
+  };
+};
+
+exports.getPositionWeatherTC = getPositionWeatherTC;
+
 var WeatherReduser = function WeatherReduser() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -178,6 +231,20 @@ var WeatherReduser = function WeatherReduser() {
     case DELATE_ALL_CURRENT_WEATHER:
       return _objectSpread({}, state, {
         CurrentWeather: []
+      });
+
+    case SET_YOUR_POSITION:
+      return _objectSpread({}, state, {
+        yourPosition: {
+          lat: action.lat,
+          "long": action["long"],
+          timestamp: action.timestamp
+        }
+      });
+
+    case SET_YOUR_POSITION_WEATHER:
+      return _objectSpread({}, state, {
+        yourPositionWeather: action.weatherData
       });
 
     default:

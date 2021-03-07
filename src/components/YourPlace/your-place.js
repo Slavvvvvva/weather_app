@@ -4,9 +4,10 @@ import { compose } from 'redux'
 import y from './y.module.scss'
 import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
-import { getCurrentWeatherIdTC, getCurrentWeatherTC } from '../Redux/weather-reduser'
+import { getCurrentWeatherIdTC, getCurrentWeatherTC,getPositionWeatherTC,getPositionTC } from '../Redux/weather-reduser'
 import {setModeAC} from '../Redux/global-settings-reduser'
 import CityCard from './CityCard/city-card'
+import LocationCard from './LocationCard/location-card'
 import store from 'store'
 import { Input } from '../Util/form'
 
@@ -23,7 +24,14 @@ const YourPlace = (props) => {
                 props.getCurrentWeatherIdTC(i,lang)
             })
         }
-    }, [mode, lang])
+    }, [mode,lang])
+
+    let {long,lat} = props.position
+    useEffect(() => {
+        if (props.position){
+            props. getPositionWeatherTC(lat,long,lang)
+        }
+    }, [lat,long,lang])
 
     let cx = classNames.bind(y);
     const className = cx({
@@ -40,10 +48,24 @@ const YourPlace = (props) => {
             <CityCard city={item.massege} CurrentWeather={props.CurrentWeather[i]} key={`${i}gjkfjgk`} />
         )
     })
+
+    const find = () => {
+        props.getPositionTC()
+    }
     
     return (
         <>
             {props.CurrentWeather && ShowCityCard}
+            {props.positionWeather && <LocationCard city='your Location'
+                                        PositionWeather={props.positionWeather}
+                                        day = {`${(props.appLanguage ==='ru')?
+                                        new Date(props.position.timestamp*1000).toLocaleString('ru', {weekday: 'short', hour: 'numeric', minute: 'numeric'})
+                                        : new Date(props.position.timestamp*1000).toLocaleString('en', {weekday: 'short', hour: 'numeric',hour12: false, minute: 'numeric'})}`}/>
+            }
+            <div className={className}>
+                <p>your location <br/> weather</p>
+                <button onClick ={find} />    
+            </div>
             <div className={className}>
                 <AddCityCardReduxForm onSubmit={AddNewCity} {...props}/>
             </div>
@@ -79,9 +101,11 @@ let mapStateToProps = (state) => {
     return {
         darckMode: state.GlobalSettings.darkMode,
         CurrentWeather: state.Weather.CurrentWeather,
-        appLanguage: state.GlobalSettings.appLanguage
+        appLanguage: state.GlobalSettings.appLanguage,
+        position: state.Weather.yourPosition,
+        positionWeather:state.Weather.yourPositionWeather
     }
 }
 export default compose(
-    connect(mapStateToProps, { getCurrentWeatherIdTC, getCurrentWeatherTC, setModeAC })
+    connect(mapStateToProps, { getCurrentWeatherIdTC, getCurrentWeatherTC,getPositionWeatherTC,getPositionTC, setModeAC })
 )(YourPlace)

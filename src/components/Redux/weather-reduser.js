@@ -4,7 +4,9 @@ import { stopSubmit, reset } from 'redux-form'
 
 let initialState = {
     CurrentWeather: [],
-    CNTdaysWeather: []
+    CNTdaysWeather: [],
+    yourPosition: {},
+    yourPositionWeather:null
 }
 
 const SET_CURRENT_WEATHER = 'SET_CURRENT_WEATHER'
@@ -41,6 +43,28 @@ const delAllCurrentWeatherAC = () => {
     return (
         {
             type: DELATE_ALL_CURRENT_WEATHER,
+        }
+    )
+}
+
+const SET_YOUR_POSITION = 'SET_YOUR_POSITION'
+const setYourPositionAC = (lat, long, timestamp) =>{
+    return (
+        {
+            type: SET_YOUR_POSITION,
+            lat: lat,
+            long: long,
+            timestamp: timestamp
+        }
+    )
+}
+
+const SET_YOUR_POSITION_WEATHER = 'SET_YOUR_POSITION_WEATHER'
+const setYourPositionWeatherAC = (weatherData) => {
+    return (
+        {
+            type: SET_YOUR_POSITION_WEATHER,
+            weatherData: weatherData,
         }
     )
 }
@@ -100,6 +124,32 @@ export const getCNTDaysWeatherTC = (lat, lon, lang) => {
     }
 }
 
+export const getPositionTC = () => {
+    return (dispatch) => {
+        if (!navigator.geolocation) {
+            console.log('Geolocation не поддерживается вашим браузером')
+          } else {
+            navigator.geolocation.watchPosition((position) => {
+                dispatch(setYourPositionAC(position.coords.latitude, position.coords.longitude, position.timestamp))
+                console.log(position)
+              }, () => console.log('не получилось получить координаті'),{
+                enableHighAccuracy: true,
+                maximumAge        : 30000,
+                timeout           : 27000
+              })
+          }
+    }
+}
+
+export const getPositionWeatherTC = (lat,lon,lang) => {
+    return (dispatch) => {
+        getCNTdaysWeathaearId(lat,lon, lang)
+                    .then(responce =>{
+                        dispatch(setYourPositionWeatherAC(responce))
+                    })
+    }
+}
+
 
 const WeatherReduser = (state = initialState, action) => {
     switch (action.type) {
@@ -117,8 +167,10 @@ const WeatherReduser = (state = initialState, action) => {
             CurrentWeather: state.CurrentWeather.filter(item => item.id !== action.id )       
         }
         case DELATE_ALL_CURRENT_WEATHER : return {...state, CurrentWeather:[]}
+        case SET_YOUR_POSITION : return {...state, yourPosition: {lat: action.lat, long: action.long, timestamp: action.timestamp}}
+        case SET_YOUR_POSITION_WEATHER: return {...state, yourPositionWeather:action.weatherData}
         default: return state
     }
 }
 export default WeatherReduser
-export { setCurrentWeatherAC, delCurrentWeatherAC, delAllCurrentWeatherAC }
+export { setCurrentWeatherAC, delCurrentWeatherAC, delAllCurrentWeatherAC, setYourPositionAC }

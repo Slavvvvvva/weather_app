@@ -81,22 +81,20 @@
 
 .datail {
   width: 100%;
-  min-width: 0;
-  min-height: 0;
   height: 426px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 0 0 20px 20px;
   background: white;
-  background: linear-gradient(180deg, #7ef167 0%, #4de5f4 100%);
+  background: linear-gradient(180deg, #4de5f4 0%, #7ef167 100%);
 }
 .datail .item_wrapper {
   display: flex;
   justify-content: start;
   align-items: center;
   overflow-x: auto;
-  height: 160px;
+  height: 190px;
 }
 
 .datail::-webkit-scrollbar-track {
