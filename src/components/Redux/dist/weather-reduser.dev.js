@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setYourPositionAC = exports.delAllCurrentWeatherAC = exports.delCurrentWeatherAC = exports.setCurrentWeatherAC = exports["default"] = exports.getPositionWeatherTC = exports.getPositionTC = exports.getCNTDaysWeatherTC = exports.getCurrentWeatherIdTC = exports.getCurrentWeatherTC = void 0;
+exports.setYourPositionAC = exports.delAllCurrentWeatherAC = exports.delLocationWeatherAC = exports.delCurrentWeatherAC = exports.setCurrentWeatherAC = exports["default"] = exports.getPositionWeatherTC = exports.getPositionTC = exports.getCNTDaysWeatherTC = exports.getCurrentWeatherIdTC = exports.getCurrentWeatherTC = void 0;
 
 var _weatherApi = require("../API/weather-api");
 
@@ -62,6 +62,15 @@ var delCurrentWeatherAC = function delCurrentWeatherAC(id) {
 };
 
 exports.delCurrentWeatherAC = delCurrentWeatherAC;
+var DELATE_LOCATION_WEATHER = 'DELATE_LOCATION_WEATHER';
+
+var delLocationWeatherAC = function delLocationWeatherAC() {
+  return {
+    type: DELATE_LOCATION_WEATHER
+  };
+};
+
+exports.delLocationWeatherAC = delLocationWeatherAC;
 var DELATE_ALL_CURRENT_WEATHER = 'DELATE_ALL_CURRENT_WEATHER';
 
 var delAllCurrentWeatherAC = function delAllCurrentWeatherAC() {
@@ -172,9 +181,14 @@ var getPositionTC = function getPositionTC() {
     } else {
       navigator.geolocation.watchPosition(function (position) {
         dispatch(setYourPositionAC(position.coords.latitude, position.coords.longitude, position.timestamp));
+
+        _store["default"].set('position', true
+        /* {lat: position.coords.latitude, long: position.coords.longitude, time: position.timestamp} */
+        );
+
         console.log(position);
       }, function () {
-        return console.log('не получилось получить координаті');
+        return console.log('не получилось получить координаты');
       }, {
         enableHighAccuracy: true,
         maximumAge: 30000,
@@ -226,6 +240,14 @@ var WeatherReduser = function WeatherReduser() {
         CurrentWeather: state.CurrentWeather.filter(function (item) {
           return item.id !== action.id;
         })
+      });
+
+    case DELATE_LOCATION_WEATHER:
+      _store["default"].set('position', false);
+
+      return _objectSpread({}, state, {
+        yourPositionWeather: null,
+        yourPosition: {}
       });
 
     case DELATE_ALL_CURRENT_WEATHER:

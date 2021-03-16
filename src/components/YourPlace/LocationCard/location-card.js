@@ -3,7 +3,7 @@ import { compose } from 'redux'
 import c from './c.module.scss'
 import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
-import { getCurrentWeatherTC, delCurrentWeatherAC } from '../../Redux/weather-reduser'
+import { getCurrentWeatherTC, delLocationWeatherAC } from '../../Redux/weather-reduser'
 import {chaingeActiveCityAC} from '../../Redux/global-settings-reduser'
 import d01 from '../../IMG/openweathermap/01d.svg'
 import n01 from '../../IMG/openweathermap/01n.svg'
@@ -64,9 +64,9 @@ const LocationCard = (props) => {
    
     let sityCoord = `${props.PositionWeather.lon}_${props.PositionWeather.lat}`
 
-    /* const DaliteCard = () => {
-        props.delCurrentWeatherAC(props.CurrentWeather.id)
-    } */
+    const DaliteCard = () => {
+        props.delLocationWeatherAC()
+    }
 
     if (!props.PositionWeather) {
         return (
@@ -88,9 +88,9 @@ const LocationCard = (props) => {
                 {Math.round(props.PositionWeather.current.temp)}&#176;
             </p>
             <div className={c.des}> {props.PositionWeather.current.weather[0].description}</div>
-            <p className = {c.update}> {`${(props.appLanguage === 'ru')? 'последнее обновление':'Last update' }`} <br/>{props.day}</p>
-            <button className= {classNameB} /* onClick={DaliteCard} */ key={`jfkcncxfd`}></button>      
+            <p className = {c.update}> {`${(props.appLanguage === 'ru')? 'последнее обновление':'Last update' }`} <br/>{props.day}</p>      
         </NavLink>
+        <button className= {classNameB} onClick={DaliteCard} key={`jfkcncxfd`}></button>  
         </div>
     )
 }
@@ -102,5 +102,5 @@ let mapStateToProps = (state) => {
     }
 }
 export default compose(
-    connect(mapStateToProps, { getCurrentWeatherTC, chaingeActiveCityAC, delCurrentWeatherAC })
+    connect(mapStateToProps, { getCurrentWeatherTC, chaingeActiveCityAC, delLocationWeatherAC })
 )(LocationCard)

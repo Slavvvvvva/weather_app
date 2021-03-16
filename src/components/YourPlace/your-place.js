@@ -29,9 +29,16 @@ const YourPlace = (props) => {
     let {long,lat} = props.position
     useEffect(() => {
         if (props.position){
-            props. getPositionWeatherTC(lat,long,lang)
+            props.getPositionWeatherTC(lat,long,lang)
         }
     }, [lat,long,lang])
+
+    let position = store.get('position')
+    useEffect(()=>{
+        if(position){
+            props.getPositionTC()
+        }
+    },[position])
 
     let cx = classNames.bind(y);
     const className = cx({
@@ -72,7 +79,7 @@ const YourPlace = (props) => {
         </>
 
     )
-}
+}           
 
 let notAmptyRU = (value) => {
     if (value) return undefined

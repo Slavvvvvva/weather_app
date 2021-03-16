@@ -38,6 +38,15 @@ const delCurrentWeatherAC = (id) => {
     )
 }
 
+const DELATE_LOCATION_WEATHER = 'DELATE_LOCATION_WEATHER'
+const delLocationWeatherAC = () => {
+    return (
+        {
+            type: DELATE_LOCATION_WEATHER,
+        }
+    )
+}
+
 const DELATE_ALL_CURRENT_WEATHER = 'DELATE_ALL_CURRENT_WEATHER'
 const delAllCurrentWeatherAC = () => {
     return (
@@ -131,8 +140,9 @@ export const getPositionTC = () => {
           } else {
             navigator.geolocation.watchPosition((position) => {
                 dispatch(setYourPositionAC(position.coords.latitude, position.coords.longitude, position.timestamp))
+                store.set('position',true/* {lat: position.coords.latitude, long: position.coords.longitude, time: position.timestamp} */)
                 console.log(position)
-              }, () => console.log('не получилось получить координаті'),{
+              }, () => console.log('не получилось получить координаты'),{
                 enableHighAccuracy: true,
                 maximumAge        : 30000,
                 timeout           : 27000
@@ -166,6 +176,9 @@ const WeatherReduser = (state = initialState, action) => {
             return {...state, 
             CurrentWeather: state.CurrentWeather.filter(item => item.id !== action.id )       
         }
+        case DELATE_LOCATION_WEATHER:
+            store.set('position',false)
+            return {...state, yourPositionWeather:null, yourPosition: {} }
         case DELATE_ALL_CURRENT_WEATHER : return {...state, CurrentWeather:[]}
         case SET_YOUR_POSITION : return {...state, yourPosition: {lat: action.lat, long: action.long, timestamp: action.timestamp}}
         case SET_YOUR_POSITION_WEATHER: return {...state, yourPositionWeather:action.weatherData}
@@ -173,4 +186,4 @@ const WeatherReduser = (state = initialState, action) => {
     }
 }
 export default WeatherReduser
-export { setCurrentWeatherAC, delCurrentWeatherAC, delAllCurrentWeatherAC, setYourPositionAC }
+export { setCurrentWeatherAC, delCurrentWeatherAC, delLocationWeatherAC, delAllCurrentWeatherAC, setYourPositionAC }

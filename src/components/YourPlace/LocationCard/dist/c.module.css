@@ -4,8 +4,8 @@
 }
 .wrapper .delate {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 60px;
+  right: 60px;
   width: 40px;
   height: 40px;
   background: none;
@@ -133,7 +133,7 @@ p.temperature {
   }
 
   .wrapper .delate {
-    top: 20px;
+    top: 40px;
     right: 20px;
     width: 30px;
     height: 30px;
