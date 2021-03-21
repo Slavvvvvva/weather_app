@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { compose } from 'redux'
 import c from './c.module.scss'
 import classNames from 'classnames/bind'

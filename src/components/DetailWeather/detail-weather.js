@@ -76,10 +76,7 @@ const DatailWeathear = (props) => {
         datail: true,
         datail_dark: props.darckMode,
     })
-    const classNameB = cx({
-        chainge_mode_white: true,
-        chainge_mode_darck: props.dispayMode
-    })
+    
     const classNameBack = cx({
         back_white: true,
         back_darck: props.darckMode
@@ -117,10 +114,6 @@ const DatailWeathear = (props) => {
             hourlyItem ={true} />
         )
     })
-
-    const ChaingeMode = () => {
-        props.TogleDetailWeatherAC()
-    }
 
     return (
         <div className={d.datail_wrapper} >

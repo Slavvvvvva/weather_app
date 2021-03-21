@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { compose } from 'redux'
 import c from './c.module.scss'
 import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
-import { getCurrentWeatherTC, delLocationWeatherAC } from '../../Redux/weather-reduser'
+import { getCurrentWeatherTC, stopTrackingLocationTC } from '../../Redux/weather-reduser'
 import {chaingeActiveCityAC} from '../../Redux/global-settings-reduser'
 import d01 from '../../IMG/openweathermap/01d.svg'
 import n01 from '../../IMG/openweathermap/01n.svg'
@@ -65,7 +65,7 @@ const LocationCard = (props) => {
     let sityCoord = `${props.PositionWeather.lon}_${props.PositionWeather.lat}`
 
     const DaliteCard = () => {
-        props.delLocationWeatherAC()
+        props.stopTrackingLocationTC(props.positionID)
     }
 
     if (!props.PositionWeather) {
@@ -98,9 +98,10 @@ const LocationCard = (props) => {
 let mapStateToProps = (state) => {
     return {
         darckMode: state.GlobalSettings.darkMode,
-        appLanguage: state.GlobalSettings.appLanguage, 
+        appLanguage: state.GlobalSettings.appLanguage,
+        positionID: state.Weather.yourPositionId
     }
 }
 export default compose(
-    connect(mapStateToProps, { getCurrentWeatherTC, chaingeActiveCityAC, delLocationWeatherAC })
+    connect(mapStateToProps, { getCurrentWeatherTC, chaingeActiveCityAC, stopTrackingLocationTC })
 )(LocationCard)

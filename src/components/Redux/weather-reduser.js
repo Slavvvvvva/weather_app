@@ -6,7 +6,8 @@ let initialState = {
     CurrentWeather: [],
     CNTdaysWeather: [],
     yourPosition: {},
-    yourPositionWeather:null
+    yourPositionWeather:null,
+    yourPositionId:[]
 }
 
 const SET_CURRENT_WEATHER = 'SET_CURRENT_WEATHER'
@@ -64,6 +65,26 @@ const setYourPositionAC = (lat, long, timestamp) =>{
             lat: lat,
             long: long,
             timestamp: timestamp
+        }
+    )
+}
+
+const SET_POSITION_ID = 'SET_POSITION_ID'
+const setPositionIdAC = (id) =>{
+    return (
+        {
+            type: SET_POSITION_ID,
+            id: id
+        }
+    )
+}
+
+const DEL_POSITION_ID = 'DEL_POSITION_ID'
+const delPositionIdAC = () =>{
+    return (
+        {
+            type: DEL_POSITION_ID,
+            
         }
     )
 }
@@ -135,19 +156,32 @@ export const getCNTDaysWeatherTC = (lat, lon, lang) => {
 
 export const getPositionTC = () => {
     return (dispatch) => {
+        let positionId = navigator.geolocation.watchPosition((position) => {
+            dispatch(setYourPositionAC(position.coords.latitude, position.coords.longitude, position.timestamp))
+            store.set('position',true)
+            console.log(position)
+          }, () => console.log('не получилось получить координаты'),{
+            enableHighAccuracy: true,
+            maximumAge        : 30000,
+            timeout           : 27000
+        })
         if (!navigator.geolocation) {
             console.log('Geolocation не поддерживается вашим браузером')
           } else {
-            navigator.geolocation.watchPosition((position) => {
-                dispatch(setYourPositionAC(position.coords.latitude, position.coords.longitude, position.timestamp))
-                store.set('position',true/* {lat: position.coords.latitude, long: position.coords.longitude, time: position.timestamp} */)
-                console.log(position)
-              }, () => console.log('не получилось получить координаты'),{
-                enableHighAccuracy: true,
-                maximumAge        : 30000,
-                timeout           : 27000
-              })
+            dispatch(setPositionIdAC(positionId))
           }
+    }
+}
+
+export const stopTrackingLocationTC = (id) => {
+    return (dispatch) => {
+        id.forEach( (item)=>{
+            debugger
+            navigator.geolocation.clearWatch(item)
+        })
+        
+        dispatch(delLocationWeatherAC())
+        dispatch(delPositionIdAC())
     }
 }
 
@@ -181,6 +215,12 @@ const WeatherReduser = (state = initialState, action) => {
             return {...state, yourPositionWeather:null, yourPosition: {} }
         case DELATE_ALL_CURRENT_WEATHER : return {...state, CurrentWeather:[]}
         case SET_YOUR_POSITION : return {...state, yourPosition: {lat: action.lat, long: action.long, timestamp: action.timestamp}}
+        case SET_POSITION_ID :
+            let stateCopy = { ...state }
+            stateCopy.yourPositionId = [...state.yourPositionId]
+            stateCopy.yourPositionId.push(action.id)
+            return stateCopy 
+        case DEL_POSITION_ID : return {...state, yourPositionId: []}
         case SET_YOUR_POSITION_WEATHER: return {...state, yourPositionWeather:action.weatherData}
         default: return state
     }

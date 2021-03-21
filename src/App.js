@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import s from './App.module.scss';
 import { connect } from 'react-redux'
 import { compose } from 'redux';
