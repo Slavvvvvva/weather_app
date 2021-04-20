@@ -1,92 +1,96 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { compose } from 'redux';
 import h from './h.module.scss'
-import classNames from 'classnames/bind';
+import classNames from 'classnames/bind'
 import { connect } from 'react-redux';
-import {chaingeDarckModeAC, togleLanguageAC} from '../Redux/global-settings-reduser'
-import {delAllCurrentWeatherAC} from '../Redux/weather-reduser'
+import { chaingeDarckModeAC, togleLanguageAC } from '../Redux/global-settings-reduser'
+import { delAllCurrentWeatherAC } from '../Redux/weather-reduser'
 import logo from '../IMG/weatherIcon/AppLogo.svg'
 import { NavLink } from 'react-router-dom';
+import Button from '../Util/Button/Button';
 
 const Header = (props) => {
 
     const [settingsActiv, setSettingsActiv] = useState(false)
 
     let cx = classNames.bind(h);
-    const className =cx({
-        chainge_mode_white: true,
-        chainge_mode_darck: props.darckMode
-    })
-    const classNameL =cx({
+    
+    const LogoStyle = cx({
         logo: true,
         logo_darck: props.darckMode
     })
-    const classNameLang =cx({
-        chainge_mode_white: true,
-        chainge_mode_darck: props.appLanguage ==='ru'
-    })
-    const classNameSetting =cx({
+    
+    const classNameSetting = cx({
         settings: true,
         settings_activ: settingsActiv,
         setting_darck: props.darckMode
     })
-    const classNameSettingBtn =cx({
+    const classNameSettingBtn = cx({
         setting_button: true,
         setting_button_black: props.darckMode
     })
 
-    const ChaingeMode = () =>{
+    const ChaingeMode = () => {
         props.chaingeDarckModeAC()
     }
-    const ChaingeLang = () =>{
+    const ChaingeLang = () => {
         props.delAllCurrentWeatherAC()
-        if(props.appLanguage === 'en') props.togleLanguageAC('ru')
+        if (props.appLanguage === 'en') props.togleLanguageAC('ru')
         else props.togleLanguageAC('en')
     }
-    
-    let time = new Date()
-    
-    
-    return(
-        <>
-        <NavLink to = {`/`} className = {classNameL}>
-            <img src = {logo} alt ='app logo'/>
-            <p>MiniWeathear</p>
-        </NavLink>
-        <div>
-            {(props.appLanguage === 'ru')?
-            <p className = {h.time}>{time.toLocaleString('ru', {weekday: 'short',year: 'numeric',month: 'short',day: 'numeric'})}</p>
-            : <p className = {h.time}>{time.toUTCString().slice(0,16)}</p>
-            }   
-        </div>
-        <div className={h.under}>
 
-        </div>
-        
-        <div className = {classNameSetting}>
-            <button className ={classNameSettingBtn} onClick = {() => setSettingsActiv(!settingsActiv)} ></button>
-            <div className = {h.chainge_mode}>
-                <p>{`${(props.appLanguage === 'ru')? 'светлая':'Light' }`}</p>
-                <div className ={className} onClick = {ChaingeMode}></div>
-                <p>{`${(props.appLanguage === 'ru')? 'темная':'darck' }`}</p>
+    let time = new Date()
+
+
+    return (
+        <>
+            <NavLink to={`/`} className={LogoStyle}>
+                <img src={logo} alt='app logo' />
+                <p>MiniWeathear</p>
+            </NavLink>
+            <div>
+                {(props.appLanguage === 'ru') ?
+                    <p className={h.time}>{time.toLocaleString('ru', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}</p>
+                    : <p className={h.time}>{time.toUTCString().slice(0, 16)}</p>
+                }
             </div>
-            <div className = {h.chainge_mode}>
-                <p>{`${(props.appLanguage === 'ru')? 'англ':'ENG' }`}</p>
-                <div className ={classNameLang} onClick = {ChaingeLang}></div>
-                <p>{`${(props.appLanguage === 'ru')? 'ру':'RU' }`}</p>
+            <div className={h.under}>
+
             </div>
-        </div>
-        
+
+            <div className={classNameSetting}>
+                <button
+                className={classNameSettingBtn}
+                onClick={() => setSettingsActiv(!settingsActiv)} ></button>
+                <Button
+                    ChaingeMode={ChaingeMode}
+                    RuTextLeft= 'светлая'
+                    RutextRight ='темная'
+                    EnTextLeft = 'Light'
+                    EnTextRight = 'Darck'
+                />
+                <Button
+                    ChaingeMode={ChaingeLang}
+                    RuTextLeft= 'англ'
+                    RutextRight ='ру'
+                    EnTextLeft = 'ENG'
+                    EnTextRight = 'RU'
+                />
+                
+            </div>
+
         </>
     )
 }
 
-let mapStateToProps = (state) =>{
-    return{
+
+
+let mapStateToProps = (state) => {
+    return {
         darckMode: state.GlobalSettings.darkMode,
         appLanguage: state.GlobalSettings.appLanguage
     }
 }
 export default compose(
-    connect(mapStateToProps,{chaingeDarckModeAC,togleLanguageAC, delAllCurrentWeatherAC})
-) (Header)
+    connect(mapStateToProps, { chaingeDarckModeAC, togleLanguageAC, delAllCurrentWeatherAC })
+)(Header)

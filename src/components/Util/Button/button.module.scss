@@ -1,0 +1,61 @@
+.chainge_mode_white{
+    width: 61px;
+    height: 30px;
+    background-image: url('../../IMG/background/51.png')
+}
+.chainge_mode_darck{
+    width: 59px;
+    background-image: url('../../IMG/background/48.png')
+}
+.chainge_mode_white_left{
+    display: flex;
+    align-items:center;
+    width: 61px;
+    height: 30px;
+    border-radius:30px;
+    background-color:rgb(131, 129, 129);
+    
+    div{
+        width: 35px;
+        height:35px;
+        background-color:rgb(37, 7, 71);
+        margin-left: 0;
+        transition: all 3s ;
+        
+    }
+}
+.chainge_mode_white_right{
+    div{
+        margin-left: 25px;
+    }
+    
+}
+.chainge_mode{
+    width: 260px;
+    display: flex;
+    justify-content: center;
+    
+    p{
+        font-weight:normal;
+        font-size: 18px;
+        margin: 8px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    
+.chainge_mode{
+    margin: 0;
+    width: 170px;
+    p{
+        margin:4px;
+        font-size: 12px;
+    }
+    .chainge_mode_white{
+        width:40px;
+        height: 20px;
+        background-size: 100%;
+    }
+    
+}
+}

@@ -1,23 +1,4 @@
-.chainge_mode_white{
-    width: 61px;
-    height: 30px;
-    background-image: url('../IMG/background/51.png')
-}
-.chainge_mode_darck{
-    width: 59px;
-    background-image: url('../IMG/background/48.png')
-}
-.chainge_mode{
-    width: 260px;
-    display: flex;
-    justify-content: center;
-    
-    p{
-        font-weight:normal;
-        font-size: 18px;
-        margin: 8px;
-    }
-}
+
 .time{
     font-size: 30px;
     text-align: center;
@@ -93,19 +74,6 @@
         .setting_button{
             margin-right: 0;
             
-        }
-        .chainge_mode{
-            margin: 0;
-            width: 170px;
-            p{
-                margin:4px;
-                font-size: 12px;
-            }
-            .chainge_mode_white{
-                width:40px;
-                height: 20px;
-                background-size: 100%;
-            }
         }
     }
     .settings_activ{
