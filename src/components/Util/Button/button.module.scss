@@ -1,61 +1,65 @@
-.chainge_mode_white{
-    width: 61px;
-    height: 30px;
-    background-image: url('../../IMG/background/51.png')
-}
-.chainge_mode_darck{
-    width: 59px;
-    background-image: url('../../IMG/background/48.png')
-}
-.chainge_mode_white_left{
+.chainge_mode_white_left {
     display: flex;
-    align-items:center;
-    width: 61px;
-    height: 30px;
-    border-radius:30px;
-    background-color:rgb(131, 129, 129);
-    
-    div{
-        width: 35px;
-        height:35px;
-        background-color:rgb(37, 7, 71);
+    align-items: center;
+    width: 56px;
+    height: 22px;
+    border-radius: 22px;
+    background-color: #747474;
+    transition: all 1s;
+    div {
+        width: 30px;
+        height: 30px;
+        border-radius: 30px;
+        background-color: #332755;
         margin-left: 0;
-        transition: all 3s ;
-        
+        transition: all 1s;
     }
 }
-.chainge_mode_white_right{
-    div{
-        margin-left: 25px;
+.chainge_button_position {
+    div {
+        margin-left: 26px;
     }
-    
 }
-.chainge_mode{
+.chainge_mode_darck {
+    background-color: #ed2d7a;
+    div {
+        background-color: white;
+    }
+}
+.chainge_mode {
     width: 260px;
     display: flex;
     justify-content: center;
-    
-    p{
-        font-weight:normal;
+    align-items: center;
+
+    p {
+        font-weight: normal;
         font-size: 18px;
         margin: 8px;
     }
 }
 
 @media screen and (max-width: 900px) {
-    
-.chainge_mode{
-    margin: 0;
-    width: 170px;
-    p{
-        margin:4px;
-        font-size: 12px;
+    .chainge_mode {
+        margin: 0;
+        width: 160px;
+        p {
+            margin: 4px;
+            font-size: 12px;
+        }
+        .chainge_mode_white_left {
+            width: 37px;
+            height: 15px;
+            div{
+                width: 20px;
+                height:20px;
+                border-radius:20px;
+            }
+        }
+        .chainge_button_position {
+            div {
+                margin-left: 17px;
+            }
+        }
     }
-    .chainge_mode_white{
-        width:40px;
-        height: 20px;
-        background-size: 100%;
-    }
-    
-}
 }

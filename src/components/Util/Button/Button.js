@@ -1,24 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import button from './button.module.scss'
 import classNames from 'classnames/bind'
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
-const Button = ({ChaingeMode, darckMode, appLanguage, RuTextLeft, RutextRight, EnTextLeft, EnTextRight}) => {
+const Button = ({ ChaingeMode, darckMode, appLanguage, RuTextLeft, RutextRight, EnTextLeft, EnTextRight }) => {
+    const [buttonPosition, cheingeButtonPosition] = useState(true)
+
     let cx = classNames.bind(button);
-    const ButtonStyle = cx({
-        chainge_mode_white: true,
-        chainge_mode_darck: darckMode
-    })
     const classNameLang = cx({
         chainge_mode_white_left: true,
-        chainge_mode_white_right: appLanguage === 'ru'
+        chainge_button_position: buttonPosition,
+        chainge_mode_darck: darckMode
     })
+
+    const OnClickActions = () => {
+        ChaingeMode()
+        cheingeButtonPosition(!buttonPosition)
+    }
+
     return (
         <div className={button.chainge_mode}>
             <p>{`${(appLanguage === 'ru') ? RuTextLeft : EnTextLeft}`}</p>
-            <div className={classNameLang} onClick={ChaingeMode}>
-                <div/>
+            <div
+                className={classNameLang}
+                onClick={OnClickActions}
+            >
+                <div />
             </div>
             <p>{`${(appLanguage === 'ru') ? RutextRight : EnTextRight}`}</p>
         </div>
