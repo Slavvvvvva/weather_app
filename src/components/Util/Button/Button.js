@@ -1,11 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import button from './button.module.scss'
 import classNames from 'classnames/bind'
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
-const Button = ({ ChaingeMode, darckMode, appLanguage, RuTextLeft, RutextRight, EnTextLeft, EnTextRight }) => {
+const Button = ({ ChaingeMode, darckMode, appLanguage,
+        RuTextLeft, RutextRight, EnTextLeft,
+        EnTextRight, startButtonPosition }) => {
     const [buttonPosition, cheingeButtonPosition] = useState(true)
+
+    useEffect ( () =>{
+        cheingeButtonPosition(startButtonPosition)
+    }, [startButtonPosition])
 
     let cx = classNames.bind(button);
     const classNameLang = cx({

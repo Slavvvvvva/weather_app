@@ -25,7 +25,7 @@ import d50 from '../../IMG/openweathermap/50d.svg'
 import n50 from '../../IMG/openweathermap/50n.svg'
 import { NavLink } from 'react-router-dom'
 
-const iconSelector = (patch) => {
+export const iconSelector = (patch) => {
     switch (patch) {
         case '01d': return d01
         case '01n': return n01

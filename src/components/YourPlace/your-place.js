@@ -24,7 +24,7 @@ const YourPlace = (props) => {
                 props.getCurrentWeatherIdTC(i,lang)
             })
         }
-    }, [mode,lang])
+    }, [mode, lang])
 
     let {long,lat} = props.position
     useEffect(() => {

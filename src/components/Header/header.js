@@ -68,6 +68,7 @@ const Header = (props) => {
                     RutextRight ='темная'
                     EnTextLeft = 'Light'
                     EnTextRight = 'Darck'
+                    startButtonPosition ={props.darckMode}
                 />
                 <Button
                     ChaingeMode={ChaingeLang}
@@ -75,6 +76,7 @@ const Header = (props) => {
                     RutextRight ='ру'
                     EnTextLeft = 'ENG'
                     EnTextRight = 'RU'
+                    startButtonPosition ={(props.appLanguage === 'en')? false : true}
                 />
                 
             </div>
