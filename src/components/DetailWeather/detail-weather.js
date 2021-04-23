@@ -14,7 +14,6 @@ import { iconSelector } from '../Util/iconSelector'
 
 
 const DatailWeathear = (props) => {
-
     let lon = props.match.params.sityId.slice(0, props.match.params.sityId.indexOf('_'))
     let lat = props.match.params.sityId.slice(props.match.params.sityId.indexOf('_') + 1) 
     let mode = store.get('darckMode')
@@ -65,7 +64,7 @@ const DatailWeathear = (props) => {
             day ={`${(props.appLanguage ==='ru')?
              new Date(item.dt*1000).toLocaleString('ru', {weekday: 'short', hour: 'numeric', minute: 'numeric'})
              : new Date(item.dt*1000).toLocaleString('en', {weekday: 'short', hour: 'numeric',hour12: false, minute: 'numeric'})}`}
-            icon={iconSelector(item.weather[0].icon)}
+            icon={iconSelector(item.weather[0])}
             daytemp={item.temp}
             descriptions={item.weather[0].description}
             pop= {item.pop}
@@ -78,7 +77,7 @@ const DatailWeathear = (props) => {
         <div className={d.datail_wrapper} >
             <div className={className}>
                 <div>
-                    <img src={iconSelector(props.CNTDaysWeather.current.weather[0].icon)} alt='weather logo' />
+                    <img src={iconSelector(props.CNTDaysWeather.current.weather[0])} alt='weather logo' />
                     <div>
                         <p className={d.temp}> {Math.round(props.CNTDaysWeather.current.temp)}&#176; </p>
                         <p className = {d.fills}>feels like {Math.round(props.CNTDaysWeather.current.feels_like)}&#176;</p>
