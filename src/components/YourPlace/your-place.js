@@ -9,7 +9,7 @@ import {setModeAC} from '../Redux/global-settings-reduser'
 import CityCard from './CityCard/city-card'
 import LocationCard from './LocationCard/location-card'
 import store from 'store'
-import { Input } from '../Util/form'
+import { Input } from '../Util/Form/form'
 
 
 

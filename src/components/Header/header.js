@@ -5,7 +5,7 @@ import classNames from 'classnames/bind'
 import { connect } from 'react-redux';
 import { chaingeDarckModeAC, togleLanguageAC } from '../Redux/global-settings-reduser'
 import { delAllCurrentWeatherAC } from '../Redux/weather-reduser'
-import logo from '../IMG/weatherIcon/AppLogo.svg'
+import logo from '../IMG/Icons/AppLogo.svg'
 import { NavLink } from 'react-router-dom';
 import Button from '../Util/Button/Button';
 

@@ -10,7 +10,7 @@ import {TogleDetailWeatherAC, setModeAC } from '../Redux/global-settings-reduser
 import DatailItem from './DatailWeatherItem/detail-weather-item'
 import sunrice from '../IMG/openweathermap/sunrise.svg'
 import sunset from '../IMG/openweathermap/sunset.svg'
-import { iconSelector } from '../YourPlace/LocationCard/location-card'
+import { iconSelector } from '../Util/iconSelector'
 
 
 const DatailWeathear = (props) => {
@@ -53,7 +53,7 @@ const DatailWeathear = (props) => {
              day ={`${(props.appLanguage ==='ru')?
              new Date(item.dt*1000).toLocaleString('ru', {weekday: 'short'})
              : new Date(item.dt*1000).toDateString().slice( 0 ,3)}`}
-             icon={iconSelector(item.weather[0].icon)}
+             icon={iconSelector(item.weather[0])}
              daytemp={item.temp.day}
              pop= {item.pop}
              descriptions={item.weather[0].description} key={`${i}gjk`} />

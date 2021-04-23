@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { getCurrentWeatherTC, delCurrentWeatherAC } from '../../Redux/weather-reduser'
 import { chaingeActiveCityAC } from '../../Redux/global-settings-reduser'
 import { NavLink } from 'react-router-dom'
-import { iconSelector } from '../LocationCard/location-card'
+import { iconSelector } from '../../Util/iconSelector'
 
 const CityCard = (props) => {
 
@@ -40,7 +40,7 @@ const CityCard = (props) => {
             <NavLink to={`/detail/${sityCoord}`} className={className} onClick={() => props.chaingeActiveCityAC(props.CurrentWeather.name)}>
                 <p>{props.CurrentWeather.name}</p>
                 <div className={c.weather_icon}>
-                    <img src={iconSelector(props.CurrentWeather.weather[0].icon)} alt='weather icon' />
+                    <img src={iconSelector(props.CurrentWeather.weather[0])} alt='weather icon' />
                 </div>
 
                 <p className={c.temperature} >
