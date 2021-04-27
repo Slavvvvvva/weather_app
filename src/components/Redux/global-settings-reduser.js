@@ -5,6 +5,7 @@ let initialState = {
     activeCityName: null,
     dailyHourly: false,
     appLanguage: 'en',
+    
 }
 
 const CHAINGE_DARK_MODE = 'CHAINGE_DARK_MODE'

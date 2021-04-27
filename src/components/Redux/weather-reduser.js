@@ -1,13 +1,15 @@
 import { getCarrentWeathaear, getCarrentWeathaearId, getCNTdaysWeathaearId } from "../API/weather-api"
 import store from 'store'
 import { stopSubmit, reset } from 'redux-form'
+import { getCurrentPlace } from "../API/geocoding-api"
 
 let initialState = {
     CurrentWeather: [],
     CNTdaysWeather: [],
     yourPosition: {},
     yourPositionWeather:null,
-    yourPositionId:[]
+    yourPositionId:[],
+    yourPositionCity:{}
 }
 
 const SET_CURRENT_WEATHER = 'SET_CURRENT_WEATHER'
@@ -95,6 +97,15 @@ const setYourPositionWeatherAC = (weatherData) => {
         {
             type: SET_YOUR_POSITION_WEATHER,
             weatherData: weatherData,
+        }
+    )
+}
+const SET_YOUR_POSITION_CITY_NAME = 'SET_YOUR_POSITION_CITY_NAME'
+const setYourPositionCityNameAC = (locationData) => {
+    return (
+        {
+            type: SET_YOUR_POSITION_CITY_NAME,
+            locationData,
         }
     )
 }
@@ -194,6 +205,15 @@ export const getPositionWeatherTC = (lat,lon,lang) => {
     }
 }
 
+export const getPositionCityTC = (lat,lon,lang) => {
+    return (dispatch) => {
+        getCurrentPlace(lat,lon, lang)
+                    .then(responce =>{
+                        dispatch(setYourPositionCityNameAC({city:responce.city, locality:responce.locality}))
+                        console.log(responce)
+                    })
+    }
+}
 
 const WeatherReduser = (state = initialState, action) => {
     switch (action.type) {
@@ -222,6 +242,7 @@ const WeatherReduser = (state = initialState, action) => {
             return stateCopy 
         case DEL_POSITION_ID : return {...state, yourPositionId: []}
         case SET_YOUR_POSITION_WEATHER: return {...state, yourPositionWeather:action.weatherData}
+        case SET_YOUR_POSITION_CITY_NAME: return {...state, yourPositionCity: action.locationData}
         default: return state
     }
 }

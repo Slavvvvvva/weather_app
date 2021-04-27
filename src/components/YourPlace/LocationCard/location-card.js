@@ -11,11 +11,11 @@ import { iconSelector } from '../../Util/iconSelector'
 const LocationCard = (props) => {
 
     let cx = classNames.bind(c);
-    const className = cx({
+    const cardStyle = cx({
         add_card: true,
         add_card_dark: props.darckMode
     })
-    const classNameB = cx({
+    const buttonStyle = cx({
         delate: true,
         delate_darck: props.darckMode
     })
@@ -28,7 +28,7 @@ const LocationCard = (props) => {
 
     if (!props.PositionWeather) {
         return (
-            <div className={className}>
+            <div className={cardStyle}>
                 <p>Loading...</p>
             </div>
         )
@@ -36,8 +36,10 @@ const LocationCard = (props) => {
 
     return (
         <div className={c.wrapper}>
-        <NavLink to = {`/detail/${sityCoord}`} className={className} onClick = {()=> props.chaingeActiveCityAC(props.PositionWeather.name)}>
-            <p>{`${(props.appLanguage === 'ru')? 'текущaя локация':'current location' }`}</p>
+        <NavLink to = {`/detail/${sityCoord}`} className={cardStyle} onClick = {()=> props.chaingeActiveCityAC(props.PositionWeather.name)}>
+            <p>{props.city.city} <br/>
+            {props.city.locality}</p>
+            
             <div className={c.weather_icon}>
                 <img src={iconSelector(props.PositionWeather.current.weather[0])} alt='weather icon' />
             </div>
@@ -48,7 +50,7 @@ const LocationCard = (props) => {
             <div className={c.des}> {props.PositionWeather.current.weather[0].description}</div>
             <p className = {c.update}> {`${(props.appLanguage === 'ru')? 'последнее обновление':'Last update' }`} <br/>{props.day}</p>      
         </NavLink>
-        <button className= {classNameB} onClick={DaliteCard} key={`jfkcncxfd`}></button>  
+        <button className= {buttonStyle} onClick={DaliteCard} key={`jfkcncxfd`}></button>  
         </div>
     )
 }
