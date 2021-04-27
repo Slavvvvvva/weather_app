@@ -4,7 +4,7 @@ import { compose } from 'redux'
 import y from './y.module.scss'
 import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
-import { getCurrentWeatherIdTC, getCurrentWeatherTC,getPositionWeatherTC,getPositionTC } from '../Redux/weather-reduser'
+import { getCurrentWeatherIdTC, getCurrentWeatherTC,getPositionWeatherTC,getPositionTC,getPositionCityTC } from '../Redux/weather-reduser'
 import {setModeAC} from '../Redux/global-settings-reduser'
 import CityCard from './CityCard/city-card'
 import LocationCard from './LocationCard/location-card'
@@ -28,8 +28,10 @@ const YourPlace = (props) => {
 
     let {long,lat} = props.position
     useEffect(() => {
-        if (props.position){
+        if (Object.keys(props.position).length !== 0){
+            debugger
             props.getPositionWeatherTC(lat,long,lang)
+            props.getPositionCityTC(lat,long,lang)
         }
     }, [lat,long,lang])
 
@@ -67,7 +69,9 @@ const YourPlace = (props) => {
                                         PositionWeather={props.positionWeather}
                                         day = {`${(props.appLanguage ==='ru')?
                                         new Date(props.position.timestamp).toLocaleString('ru', {weekday: 'short', hour: 'numeric', minute: 'numeric'})
-                                        : new Date(props.position.timestamp).toLocaleString('en', {weekday: 'short', hour: 'numeric',hour12: false, minute: 'numeric'})}`}/>
+                                        : new Date(props.position.timestamp).toLocaleString('en', {weekday: 'short', hour: 'numeric',hour12: false, minute: 'numeric'})}`}
+                                        city ={props.positionCity}
+                                    />
             }
             <div className={className}>
                 <AddCityCardReduxForm onSubmit={AddNewCity} {...props}/>
@@ -110,9 +114,10 @@ let mapStateToProps = (state) => {
         CurrentWeather: state.Weather.CurrentWeather,
         appLanguage: state.GlobalSettings.appLanguage,
         position: state.Weather.yourPosition,
-        positionWeather:state.Weather.yourPositionWeather
+        positionWeather:state.Weather.yourPositionWeather,
+        positionCity: state.Weather.yourPositionCity
     }
 }
 export default compose(
-    connect(mapStateToProps, { getCurrentWeatherIdTC, getCurrentWeatherTC,getPositionWeatherTC,getPositionTC, setModeAC })
+    connect(mapStateToProps, { getCurrentWeatherIdTC, getCurrentWeatherTC,getPositionWeatherTC,getPositionTC,getPositionCityTC, setModeAC })
 )(YourPlace)
