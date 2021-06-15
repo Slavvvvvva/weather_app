@@ -1,6 +1,6 @@
 # The weather application is developed on react js
 
-Open [Weather_app](https://cross-stitch.space) to view it in the browser.
+Open [Weather_app](https://slavvvvvva.github.io/weather_app/#/) to view it in the browser.
 
 ## Application features
 
